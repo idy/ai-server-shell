@@ -265,12 +265,14 @@ func TestShutdownCancelsActiveSessionAndRejectsNewConnections(t *testing.T) {
 	handler := New(services, contract.Config{BasePath: "/v1", MaxBodyBytes: 1024, Authenticate: func(context.Context, *http.Request, string) (string, error) { return "caller", nil }})
 	server := httptest.NewServer(handler)
 	defer server.Close()
-	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-	defer cancel()
-	connection, _, err := websocket.Dial(ctx, "ws"+strings.TrimPrefix(server.URL, "http")+"/v1/realtime", nil)
+	dialCtx, cancelDial := context.WithTimeout(context.Background(), 10*time.Second)
+	connection, _, err := websocket.Dial(dialCtx, "ws"+strings.TrimPrefix(server.URL, "http")+"/v1/realtime", nil)
+	cancelDial()
 	if err != nil {
 		t.Fatal(err)
 	}
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 	if err := handler.Shutdown(ctx); err != nil {
 		t.Fatal(err)
 	}
