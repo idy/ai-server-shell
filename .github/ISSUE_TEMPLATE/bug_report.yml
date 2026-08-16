@@ -1,0 +1,52 @@
+name: Bug report
+description: Report incorrect server-shell behavior or a compatibility regression.
+title: "bug: "
+labels:
+  - kind/bug
+body:
+  - type: markdown
+    attributes:
+      value: Thank you for helping improve AI Server Shell.
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit
+      placeholder: v0.1.0 or commit SHA
+    validations:
+      required: true
+  - type: input
+    id: client
+    attributes:
+      label: Client SDK and version
+      placeholder: openai-node 7.x
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Observed behavior
+      description: Include relevant events, close codes, and sanitized logs.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      render: shell
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I removed credentials and private data from this report.
+          required: true
+        - label: I searched existing issues for the same behavior.
+          required: true

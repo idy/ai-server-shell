@@ -1,0 +1,32 @@
+name: Feature request
+description: Propose a protocol surface, service interface, or developer-experience improvement.
+title: "feature: "
+labels:
+  - kind/feature
+  - status/needs-design
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the developer or compatibility problem to solve.
+    validations:
+      required: true
+  - type: textarea
+    id: contract
+    attributes:
+      label: Proposed contract
+      description: Describe routes, events, interfaces, and lifecycle semantics.
+    validations:
+      required: true
+  - type: textarea
+    id: compatibility
+    attributes:
+      label: Compatibility evidence
+      description: Link official specifications or identify the stock SDK behavior to test.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
