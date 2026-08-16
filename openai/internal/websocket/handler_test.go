@@ -287,3 +287,55 @@ func TestShutdownCancelsActiveSessionAndRejectsNewConnections(t *testing.T) {
 	}
 	response.Body.Close()
 }
+
+type blockingSessionBackend struct {
+	entered chan struct{}
+	exited  chan struct{}
+}
+
+func (b *blockingSessionBackend) OpenSession(ctx context.Context, _ backend.SessionRequest) (backend.Session, error) {
+	close(b.entered)
+	<-ctx.Done()
+	close(b.exited)
+	return nil, ctx.Err()
+}
+
+func TestShutdownTracksSessionSetupBeforeUpgrade(t *testing.T) {
+	sessions := &blockingSessionBackend{entered: make(chan struct{}), exited: make(chan struct{})}
+	services, _ := backend.NewServices(backend.WithRealtime(sessions))
+	handler := New(services, contract.Config{
+		BasePath: "/v1", MaxBodyBytes: 1024,
+		Authenticate: func(context.Context, *http.Request, string) (string, error) { return "caller", nil },
+	})
+	server := httptest.NewServer(handler)
+	defer server.Close()
+	dialDone := make(chan struct{})
+	go func() {
+		defer close(dialDone)
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		connection, response, _ := websocket.Dial(ctx, "ws"+strings.TrimPrefix(server.URL, "http")+"/v1/realtime", nil)
+		if connection != nil {
+			connection.CloseNow()
+		}
+		if response != nil {
+			response.Body.Close()
+		}
+	}()
+	select {
+	case <-sessions.entered:
+	case <-time.After(5 * time.Second):
+		t.Fatal("session setup did not start")
+	}
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	if err := handler.Shutdown(ctx); err != nil {
+		t.Fatal(err)
+	}
+	select {
+	case <-sessions.exited:
+	default:
+		t.Fatal("shutdown returned before session setup exited")
+	}
+	<-dialDone
+}

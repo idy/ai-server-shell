@@ -41,11 +41,18 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	if requestID == "" {
 		requestID = newRequestID()
 	}
-	if h.isShuttingDown() {
+	ctx, cancel := context.WithCancel(request.Context())
+	sessionID, registered := h.register(cancel)
+	if !registered {
+		cancel()
 		writeHTTPError(writer, requestID, http.StatusServiceUnavailable, "service_unavailable_error", "The handler is shutting down.")
 		return
 	}
-	callerID, err := h.config.Authenticate(request.Context(), request, requestID)
+	defer h.unregister(sessionID)
+	defer cancel()
+	request = request.WithContext(ctx)
+
+	callerID, err := h.config.Authenticate(ctx, request, requestID)
 	if err != nil {
 		writeHTTPError(writer, requestID, http.StatusUnauthorized, "authentication_error", "Invalid authentication credentials.")
 		return
@@ -66,7 +73,7 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 			parameters[key] = values[len(values)-1]
 		}
 	}
-	session, err := sessionBackend.OpenSession(request.Context(), backend.SessionRequest{
+	session, err := sessionBackend.OpenSession(ctx, backend.SessionRequest{
 		Surface:    surface,
 		Metadata:   backend.Metadata{RequestID: requestID, CallerID: callerID, Protocol: "openai"},
 		Parameters: parameters,
@@ -92,15 +99,6 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	}
 	connection.SetReadLimit(h.config.MaxBodyBytes)
 
-	ctx, cancel := context.WithCancel(request.Context())
-	defer cancel()
-	sessionID, registered := h.register(cancel)
-	if !registered {
-		closeSession(session)
-		_ = connection.Close(websocket.StatusGoingAway, "server shutdown")
-		return
-	}
-	defer h.unregister(sessionID)
 	var closeOnce sync.Once
 	closeAll := func(code websocket.StatusCode, reason string) {
 		closeOnce.Do(func() {
@@ -121,12 +119,6 @@ func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	case <-errorsChannel:
 	case <-time.After(2 * time.Second):
 	}
-}
-
-func (h *Handler) isShuttingDown() bool {
-	h.mu.Lock()
-	defer h.mu.Unlock()
-	return h.shuttingDown
 }
 
 func (h *Handler) register(cancel context.CancelFunc) (uint64, bool) {
