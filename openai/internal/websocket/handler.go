@@ -15,6 +15,7 @@ import (
 	"github.com/coder/websocket"
 	"github.com/idy/ai-server-shell/backend"
 	"github.com/idy/ai-server-shell/openai/internal/contract"
+	"github.com/idy/ai-server-shell/openai/internal/profile"
 )
 
 type handler struct {
@@ -91,8 +92,8 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	defer closeAll(websocket.StatusNormalClosure, "OK")
 
 	errorsChannel := make(chan error, 2)
-	go func() { errorsChannel <- readLoop(ctx, connection, session) }()
-	go func() { errorsChannel <- writeLoop(ctx, connection, session) }()
+	go func() { errorsChannel <- readLoop(ctx, connection, session, surface) }()
+	go func() { errorsChannel <- writeLoop(ctx, connection, session, surface) }()
 	err = <-errorsChannel
 	code, reason := closeReason(err)
 	closeAll(code, reason)
@@ -115,7 +116,7 @@ func isNilSession(session backend.Session) bool {
 	}
 }
 
-func readLoop(ctx context.Context, connection *websocket.Conn, session backend.Session) error {
+func readLoop(ctx context.Context, connection *websocket.Conn, session backend.Session, surface backend.SessionSurface) error {
 	for {
 		messageType, data, err := connection.Read(ctx)
 		if err != nil {
@@ -128,13 +129,16 @@ func readLoop(ctx context.Context, connection *websocket.Conn, session backend.S
 		if err != nil {
 			return err
 		}
+		if !eventAllowed(surface, "client", event.Type) {
+			return protocolError("event type is outside the active compatibility profile")
+		}
 		if err := session.Handle(ctx, event); err != nil {
 			return err
 		}
 	}
 }
 
-func writeLoop(ctx context.Context, connection *websocket.Conn, session backend.Session) error {
+func writeLoop(ctx context.Context, connection *websocket.Conn, session backend.Session, surface backend.SessionSurface) error {
 	for {
 		select {
 		case <-ctx.Done():
@@ -142,6 +146,9 @@ func writeLoop(ctx context.Context, connection *websocket.Conn, session backend.
 		case event, open := <-session.Events():
 			if !open {
 				return nil
+			}
+			if !eventAllowed(surface, "server", event.Type) {
+				return protocolError("backend event type is outside the active compatibility profile")
 			}
 			data, err := encodeEvent(event)
 			if err != nil {
@@ -152,6 +159,17 @@ func writeLoop(ctx context.Context, connection *websocket.Conn, session backend.
 			}
 		}
 	}
+}
+
+func eventAllowed(surface backend.SessionSurface, direction, eventType string) bool {
+	if surface == backend.SessionRealtime {
+		return profile.EventAllowed("realtime", direction, eventType) ||
+			profile.EventAllowed("realtime_translation", direction, eventType)
+	}
+	if surface == backend.SessionResponsesSocket {
+		return profile.EventAllowed("responses_websocket", direction, eventType)
+	}
+	return false
 }
 
 func decodeEvent(data []byte) (backend.Event, error) {

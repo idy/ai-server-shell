@@ -23,12 +23,21 @@ type Operation struct {
 	SuccessStatus int
 }
 
+// Event describes one direction-specific WebSocket event discriminator.
+type Event struct {
+	Surface   string
+	Direction string
+	Type      string
+}
+
 var (
 	specOnce       sync.Once
 	specJSON       []byte
 	specErr        error
 	operationOnce  sync.Once
 	operationsByID map[string]Operation
+	eventOnce      sync.Once
+	eventSet       map[string]bool
 )
 
 // SpecJSON returns an independent copy of the frozen OpenAPI document.
@@ -51,6 +60,18 @@ func SpecJSON() ([]byte, error) {
 		}
 	})
 	return append([]byte(nil), specJSON...), specErr
+}
+
+// EventAllowed reports whether a discriminator belongs to a frozen SDK event
+// union for the given surface and direction.
+func EventAllowed(surface, direction, eventType string) bool {
+	eventOnce.Do(func() {
+		eventSet = make(map[string]bool, len(Events))
+		for _, event := range Events {
+			eventSet[event.Surface+"\x00"+event.Direction+"\x00"+event.Type] = true
+		}
+	})
+	return eventSet[surface+"\x00"+direction+"\x00"+eventType]
 }
 
 // RouterSpecJSON returns a semantically equivalent document accepted by the

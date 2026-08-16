@@ -62,12 +62,21 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 		writeErrorStatus(writer, requestID, routeErrorStatus(err), &backend.Error{Kind: backend.ErrorNotFound, Message: "The requested resource was not found."})
 		return
 	}
+	operation, ok := profile.OperationForRoute(request.Method, route.Path, request.URL.Query())
+	if !ok {
+		operation, ok = profile.OperationByID(route.Operation.OperationID)
+	}
+	if !ok {
+		writeErrorStatus(writer, requestID, http.StatusNotImplemented, &backend.Error{Kind: backend.ErrorUnsupported, Message: "Operation is not in the active compatibility profile."})
+		return
+	}
+	validationRoute := h.validationRoute(route, operation)
 	validationInput := &openapi3filter.RequestValidationInput{
-		Request: request, PathParams: pathParams, QueryParams: request.URL.Query(), Route: route,
+		Request: request, PathParams: pathParams, QueryParams: request.URL.Query(), Route: validationRoute,
 		Options: &openapi3filter.Options{
 			AuthenticationFunc:                openapi3filter.NoopAuthenticationFunc,
 			MultiError:                        true,
-			RejectWhenRequestBodyNotSpecified: true,
+			RejectWhenRequestBodyNotSpecified: validationRoute.Operation.RequestBody == nil,
 		},
 	}
 	if h.config.Validate {
@@ -78,14 +87,6 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 		}
 	}
 
-	operation, ok := profile.OperationForRoute(request.Method, route.Path, request.URL.Query())
-	if !ok {
-		operation, ok = profile.OperationByID(route.Operation.OperationID)
-	}
-	if !ok {
-		writeErrorStatus(writer, requestID, http.StatusNotImplemented, &backend.Error{Kind: backend.ErrorUnsupported, Message: "Operation is not in the active compatibility profile."})
-		return
-	}
 	handler, ok := h.services.HandlerFor(backend.Capability(operation.Capability))
 	if !ok {
 		writeErrorStatus(writer, requestID, http.StatusNotImplemented, &backend.Error{
@@ -159,6 +160,22 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	if len(result.JSON) > 0 {
 		_, _ = writer.Write(result.JSON)
 	}
+}
+
+func (h *handler) validationRoute(matched *routers.Route, operation profile.Operation) *routers.Route {
+	pathItem := h.document.Paths.Value(operation.Path)
+	if pathItem == nil {
+		return matched
+	}
+	wireOperation := pathItem.GetOperation(operation.Method)
+	if wireOperation == nil {
+		return matched
+	}
+	selected := *matched
+	selected.Path = operation.Path
+	selected.PathItem = pathItem
+	selected.Operation = wireOperation
+	return &selected
 }
 
 func input(body []byte, contentType string) backend.Input {

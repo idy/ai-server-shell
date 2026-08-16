@@ -56,6 +56,12 @@ type eventSurface struct {
 	Server []string `json:"server"`
 }
 
+type generatedEvent struct {
+	Surface   string
+	Direction string
+	Type      string
+}
+
 func main() {
 	specPath := flag.String("spec", "", "path to the pinned OpenAPI JSON")
 	outputPath := flag.String("output", "", "generated Go output")
@@ -80,7 +86,17 @@ func main() {
 		fatalf("unexpected frozen profile size: paths=%d operations=%d", len(spec.Paths), len(operations))
 	}
 
-	generated, err := render(raw, len(spec.Paths), operations)
+	var events eventInventory
+	if *eventsPath != "" {
+		eventData, err := os.ReadFile(*eventsPath)
+		if err != nil {
+			fatalf("read events: %v", err)
+		}
+		if err := json.Unmarshal(eventData, &events); err != nil {
+			fatalf("decode events: %v", err)
+		}
+	}
+	generated, err := render(raw, len(spec.Paths), operations, events)
 	if err != nil {
 		fatalf("render: %v", err)
 	}
@@ -106,14 +122,6 @@ func main() {
 	if *compatibilityPath != "" {
 		if *eventsPath == "" {
 			fatalf("-events is required with -compatibility")
-		}
-		eventData, err := os.ReadFile(*eventsPath)
-		if err != nil {
-			fatalf("read events: %v", err)
-		}
-		var events eventInventory
-		if err := json.Unmarshal(eventData, &events); err != nil {
-			fatalf("decode events: %v", err)
 		}
 		matrix := renderCompatibility(operations, events)
 		if err := os.MkdirAll(filepath.Dir(*compatibilityPath), 0o755); err != nil {
@@ -254,7 +262,7 @@ func capabilityFor(path string, tags []string) string {
 	return ""
 }
 
-func render(raw []byte, pathCount int, operations []generatedOperation) ([]byte, error) {
+func render(raw []byte, pathCount int, operations []generatedOperation, inventory eventInventory) ([]byte, error) {
 	var compressed bytes.Buffer
 	zw, err := gzip.NewWriterLevel(&compressed, gzip.BestCompression)
 	if err != nil {
@@ -283,7 +291,35 @@ func render(raw []byte, pathCount int, operations []generatedOperation) ([]byte,
 			operation.RequestMedia, operation.ResponseMedia, operation.SuccessStatus)
 	}
 	fmt.Fprintln(&out, "}")
+	fmt.Fprintln(&out)
+	fmt.Fprintln(&out, "var Events = []Event{")
+	for _, event := range collectEvents(inventory) {
+		fmt.Fprintf(&out, "{Surface:%q, Direction:%q, Type:%q},\n", event.Surface, event.Direction, event.Type)
+	}
+	fmt.Fprintln(&out, "}")
 	return format.Source(out.Bytes())
+}
+
+func collectEvents(inventory eventInventory) []generatedEvent {
+	var result []generatedEvent
+	for surface, events := range inventory.Surfaces {
+		for _, eventType := range events.Client {
+			result = append(result, generatedEvent{Surface: surface, Direction: "client", Type: eventType})
+		}
+		for _, eventType := range events.Server {
+			result = append(result, generatedEvent{Surface: surface, Direction: "server", Type: eventType})
+		}
+	}
+	sort.Slice(result, func(i, j int) bool {
+		if result[i].Surface != result[j].Surface {
+			return result[i].Surface < result[j].Surface
+		}
+		if result[i].Direction != result[j].Direction {
+			return result[i].Direction < result[j].Direction
+		}
+		return result[i].Type < result[j].Type
+	})
+	return result
 }
 
 func renderCompatibility(operations []generatedOperation, events eventInventory) []byte {
@@ -301,28 +337,13 @@ func renderCompatibility(operations []generatedOperation, events eventInventory)
 		fmt.Fprintln(&out, "    support: implemented")
 	}
 	fmt.Fprintln(&out, "events:")
-	var surfaces []string
-	for surface := range events.Surfaces {
-		surfaces = append(surfaces, surface)
-	}
-	sort.Strings(surfaces)
-	for _, surface := range surfaces {
-		inventory := events.Surfaces[surface]
-		for _, direction := range []struct {
-			name   string
-			values []string
-		}{{"client", inventory.Client}, {"server", inventory.Server}} {
-			values := append([]string(nil), direction.values...)
-			sort.Strings(values)
-			for _, eventType := range values {
-				fmt.Fprintln(&out, "  - surface:", strconv.Quote(surface))
-				fmt.Fprintln(&out, "    direction:", strconv.Quote(direction.name))
-				fmt.Fprintln(&out, "    type:", strconv.Quote(eventType))
-				fmt.Fprintln(&out, "    capability: realtime")
-				fmt.Fprintln(&out, "    local_case: event-roundtrip")
-				fmt.Fprintln(&out, "    support: implemented")
-			}
-		}
+	for _, event := range collectEvents(events) {
+		fmt.Fprintln(&out, "  - surface:", strconv.Quote(event.Surface))
+		fmt.Fprintln(&out, "    direction:", strconv.Quote(event.Direction))
+		fmt.Fprintln(&out, "    type:", strconv.Quote(event.Type))
+		fmt.Fprintln(&out, "    capability: realtime")
+		fmt.Fprintln(&out, "    local_case: event-roundtrip")
+		fmt.Fprintln(&out, "    support: implemented")
 	}
 	return out.Bytes()
 }

@@ -238,3 +238,23 @@ func TestCodecAndCloseHelpers(t *testing.T) {
 		t.Fatal("close reason was not truncated")
 	}
 }
+
+func TestFrozenEventAllowlist(t *testing.T) {
+	for _, test := range []struct {
+		surface   backend.SessionSurface
+		direction string
+		eventType string
+		want      bool
+	}{
+		{backend.SessionRealtime, "client", "session.update", true},
+		{backend.SessionRealtime, "client", "session.close", true},
+		{backend.SessionRealtime, "server", "response.done", true},
+		{backend.SessionResponsesSocket, "client", "response.create", true},
+		{backend.SessionResponsesSocket, "server", "response.completed", true},
+		{backend.SessionResponsesSocket, "client", "future.event", false},
+	} {
+		if got := eventAllowed(test.surface, test.direction, test.eventType); got != test.want {
+			t.Fatalf("eventAllowed(%s, %s, %s) = %v", test.surface, test.direction, test.eventType, got)
+		}
+	}
+}

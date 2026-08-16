@@ -22,11 +22,11 @@ func TestCollectOperationsAndRenderDeterministically(t *testing.T) {
 		t.Fatalf("operations = %#v", operations)
 	}
 	raw := []byte(`{"openapi":"3.1.0","paths":{}}`)
-	first, err := render(raw, 2, operations)
+	first, err := render(raw, 2, operations, eventInventory{})
 	if err != nil {
 		t.Fatal(err)
 	}
-	second, err := render(raw, 2, operations)
+	second, err := render(raw, 2, operations, eventInventory{})
 	if err != nil {
 		t.Fatal(err)
 	}

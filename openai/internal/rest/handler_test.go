@@ -82,6 +82,25 @@ func TestHandlerFailureBoundaries(t *testing.T) {
 	}
 }
 
+func TestValidationRouteSelectsBetaSchema(t *testing.T) {
+	services, _ := backend.NewServices()
+	h := testHandler(t, services, true, nil).(*handler)
+	request := httptest.NewRequest(http.MethodPost, "/v1/responses?beta=true", bytes.NewReader([]byte(`{}`)))
+	request.Header.Set("Content-Type", "application/json")
+	matched, _, err := h.router.FindRoute(request)
+	if err != nil {
+		t.Fatal(err)
+	}
+	operation, ok := profile.OperationForRoute(request.Method, matched.Path, request.URL.Query())
+	if !ok {
+		t.Fatal("beta operation was not selected")
+	}
+	selected := h.validationRoute(matched, operation)
+	if selected.Operation.OperationID != "beta_createResponse" || selected.Path != "/responses?beta=true" {
+		t.Fatalf("validation route = %s %s", selected.Path, selected.Operation.OperationID)
+	}
+}
+
 func TestHandlerMapsBackendErrors(t *testing.T) {
 	tests := []struct {
 		kind   backend.ErrorKind
