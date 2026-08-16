@@ -96,7 +96,7 @@ func TestValidationRouteSelectsBetaSchema(t *testing.T) {
 		t.Fatal("beta operation was not selected")
 	}
 	selected := h.validationRoute(matched, operation)
-	if selected.Operation.OperationID != "beta_createResponse" || selected.Path != "/responses?beta=true" {
+	if selected.Operation.OperationID != "beta_createResponse" || selected.Path != "/responses" {
 		t.Fatalf("validation route = %s %s", selected.Path, selected.Operation.OperationID)
 	}
 }

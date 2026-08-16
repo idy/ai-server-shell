@@ -258,3 +258,32 @@ func TestFrozenEventAllowlist(t *testing.T) {
 		}
 	}
 }
+
+func TestShutdownCancelsActiveSessionAndRejectsNewConnections(t *testing.T) {
+	sessions := &echoSessionBackend{}
+	services, _ := backend.NewServices(backend.WithRealtime(sessions))
+	handler := New(services, contract.Config{BasePath: "/v1", MaxBodyBytes: 1024, Authenticate: func(context.Context, *http.Request, string) (string, error) { return "caller", nil }})
+	server := httptest.NewServer(handler)
+	defer server.Close()
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	connection, _, err := websocket.Dial(ctx, "ws"+strings.TrimPrefix(server.URL, "http")+"/v1/realtime", nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := handler.Shutdown(ctx); err != nil {
+		t.Fatal(err)
+	}
+	_, _, err = connection.Read(ctx)
+	if err == nil {
+		t.Fatal("connection remained open after shutdown")
+	}
+	newConnection, response, err := websocket.Dial(ctx, "ws"+strings.TrimPrefix(server.URL, "http")+"/v1/realtime", nil)
+	if newConnection != nil {
+		newConnection.CloseNow()
+	}
+	if err == nil || response == nil || response.StatusCode != http.StatusServiceUnavailable {
+		t.Fatalf("post-shutdown dial err=%v response=%v", err, response)
+	}
+	response.Body.Close()
+}

@@ -27,3 +27,11 @@ from unary HTTP calls.
 
 The aggregate `aiservershell.Server` only mounts independently constructed
 `http.Handler` values. It does not own listeners or application backends.
+Its `Shutdown` method delegates to mounted handlers that implement the same
+lifecycle contract. The application remains responsible for shutting down its
+`http.Server`. The OpenAI handler rejects new WebSocket upgrades, cancels all
+accepted sessions, and waits until they exit or the shutdown context expires;
+ordinary HTTP and SSE work remains tied to the request context.
+
+Mount patterns use `http.ServeMux` syntax. Invalid, duplicate, or mutually
+conflicting patterns fail construction instead of panicking while serving.

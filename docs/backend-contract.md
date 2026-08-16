@@ -11,10 +11,17 @@ closes bodies and streams after serving them. Producers must close event
 channels and make `Close` idempotent. Context cancellation means work should
 stop promptly; implementations must not retain input buffers past the call.
 
+For paginated operations, the backend owns ordering and cursor semantics while
+the shell preserves the SDK-provided path and query values. Binary response
+bodies are owned and closed by the shell. Streams are consumed in order, closed
+by the shell, and canceled through the request context.
+
 Use `backend.Error` for safe failure mapping. Unknown errors become a generic
 500 without serializing Go errors. Invalid, authentication, permission, missing,
 conflict, rate-limit, unsupported, and unavailable failures have stable HTTP
 mappings. `RetryAfter` is emitted only as a safe integer header.
+An absent capability uses the unsupported mapping (501). A configured backend
+uses the invalid mapping (400) when an option is unsupported by its operation.
 
 Known WebSocket events preserve their complete raw JSON, including unknown
 fields. A `Session` has one input call path and one output channel. `Close` must

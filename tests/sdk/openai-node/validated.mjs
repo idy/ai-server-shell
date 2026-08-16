@@ -11,6 +11,13 @@ const client = new OpenAI({
 
 await client.models.list({ limit: 1 });
 await client.embeddings.create({ model: 'text-embedding-test', input: 'hello' });
+let invalidRejected = false;
+try {
+  await client.embeddings.create({ model: 'text-embedding-test' });
+} catch (error) {
+  invalidRejected = error?.status === 400;
+}
+if (!invalidRejected) throw new Error('invalid embedding request was not rejected with HTTP 400');
 await client.files.create({
   file: await toFile(Buffer.from('{"test":true}\n'), 'input.jsonl'),
   purpose: 'batch',
@@ -18,4 +25,4 @@ await client.files.create({
 const content = await client.files.content('file_test');
 if (await content.text() !== 'binary-test') throw new Error('unexpected binary file content');
 
-process.stdout.write(`${JSON.stringify({ passed: 4 })}\n`);
+process.stdout.write(`${JSON.stringify({ passed: 4, invalidRejected })}\n`);

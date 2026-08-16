@@ -95,6 +95,9 @@ func main() {
 		if err := json.Unmarshal(eventData, &events); err != nil {
 			fatalf("decode events: %v", err)
 		}
+		if count := len(collectEvents(events)); count != 121 {
+			fatalf("event inventory contains %d direction-specific entries, want 121", count)
+		}
 	}
 	generated, err := render(raw, len(spec.Paths), operations, events)
 	if err != nil {

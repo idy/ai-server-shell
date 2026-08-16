@@ -1,6 +1,8 @@
 package aiservershell
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"net/http"
 	"reflect"
@@ -9,7 +11,8 @@ import (
 // Server is an optional aggregate for independently constructed protocol
 // handlers. It implements http.Handler and does not own network listeners.
 type Server struct {
-	mux *http.ServeMux
+	mux      *http.ServeMux
+	handlers []http.Handler
 }
 
 // ServerOption configures an aggregate Server.
@@ -35,11 +38,29 @@ func New(options ...ServerOption) (*Server, error) {
 			return nil, err
 		}
 	}
-	mux := http.NewServeMux()
+	mux, err := buildMux(config.handlers)
+	if err != nil {
+		return nil, err
+	}
+	handlers := make([]http.Handler, 0, len(config.handlers))
 	for _, mounted := range config.handlers {
+		handlers = append(handlers, mounted.handler)
+	}
+	return &Server{mux: mux, handlers: handlers}, nil
+}
+
+func buildMux(handlers []mountedHandler) (mux *http.ServeMux, err error) {
+	defer func() {
+		if recovered := recover(); recovered != nil {
+			mux = nil
+			err = fmt.Errorf("aiservershell: conflicting handler patterns: %v", recovered)
+		}
+	}()
+	mux = http.NewServeMux()
+	for _, mounted := range handlers {
 		mux.Handle(mounted.pattern, mounted.handler)
 	}
-	return &Server{mux: mux}, nil
+	return mux, nil
 }
 
 // WithHandler mounts one independently constructed protocol handler. Pattern
@@ -90,4 +111,19 @@ func validatePattern(pattern string) (err error) {
 
 func (s *Server) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	s.mux.ServeHTTP(writer, request)
+}
+
+// Shutdown asks mounted handlers with active protocol sessions to stop and
+// waits for them to finish. Listener shutdown remains owned by the application's
+// http.Server; callers normally invoke both with the same context.
+func (s *Server) Shutdown(ctx context.Context) error {
+	var shutdownErrors []error
+	for _, handler := range s.handlers {
+		if shutdowner, ok := handler.(interface{ Shutdown(context.Context) error }); ok {
+			if err := shutdowner.Shutdown(ctx); err != nil {
+				shutdownErrors = append(shutdownErrors, err)
+			}
+		}
+	}
+	return errors.Join(shutdownErrors...)
 }

@@ -22,14 +22,17 @@ import (
 )
 
 type handler struct {
-	services backend.Services
-	document *openapi3.T
-	router   routers.Router
-	config   contract.Config
+	services         backend.Services
+	router           routers.Router
+	validationRoutes map[string]*routers.Route
+	config           contract.Config
 }
 
 func New(services backend.Services, document *openapi3.T, router routers.Router, config contract.Config) http.Handler {
-	return &handler{services: services, document: document, router: router, config: config}
+	return &handler{
+		services: services, router: router,
+		validationRoutes: validationRoutesByOperationID(document), config: config,
+	}
 }
 
 func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
@@ -163,19 +166,36 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 }
 
 func (h *handler) validationRoute(matched *routers.Route, operation profile.Operation) *routers.Route {
-	pathItem := h.document.Paths.Value(operation.Path)
-	if pathItem == nil {
-		return matched
-	}
-	wireOperation := pathItem.GetOperation(operation.Method)
-	if wireOperation == nil {
+	indexed, ok := h.validationRoutes[operation.ID]
+	if !ok {
 		return matched
 	}
 	selected := *matched
-	selected.Path = operation.Path
-	selected.PathItem = pathItem
-	selected.Operation = wireOperation
+	selected.Path = indexed.Path
+	selected.PathItem = indexed.PathItem
+	selected.Operation = indexed.Operation
 	return &selected
+}
+
+func validationRoutesByOperationID(document *openapi3.T) map[string]*routers.Route {
+	routes := make(map[string]*routers.Route)
+	var server *openapi3.Server
+	if len(document.Servers) > 0 {
+		server = document.Servers[0]
+	}
+	for profilePath, pathItem := range document.Paths.Map() {
+		canonicalPath, _, _ := strings.Cut(profilePath, "?")
+		for method, operation := range pathItem.Operations() {
+			if operation.OperationID == "" {
+				continue
+			}
+			routes[operation.OperationID] = &routers.Route{
+				Spec: document, Server: server, Path: canonicalPath, PathItem: pathItem,
+				Method: method, Operation: operation,
+			}
+		}
+	}
+	return routes
 }
 
 func input(body []byte, contentType string) backend.Input {

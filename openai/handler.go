@@ -20,7 +20,13 @@ import (
 type Handler struct {
 	basePath  string
 	rest      http.Handler
-	websocket http.Handler
+	websocket *ws.Handler
+}
+
+// Shutdown cancels active WebSocket sessions and waits for their handlers to
+// finish. Unary HTTP and SSE requests remain governed by their request context.
+func (h *Handler) Shutdown(ctx context.Context) error {
+	return h.websocket.Shutdown(ctx)
 }
 
 // NewHandler constructs an independently mountable OpenAI http.Handler.

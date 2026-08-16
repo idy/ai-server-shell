@@ -48,6 +48,11 @@ shell, err := aiservershell.New(
 )
 ```
 
+The application owns the listener. During graceful shutdown, stop the
+`http.Server` and call `shell.Shutdown(ctx)`; the latter prevents new protocol
+upgrades, cancels active OpenAI WebSocket sessions, and waits for them to exit.
+Unary HTTP and SSE calls follow their request contexts.
+
 See [`examples/minimal`](examples/minimal/main.go),
 [`docs/backend-contract.md`](docs/backend-contract.md), and
 [`docs/openai-compatibility.md`](docs/openai-compatibility.md).

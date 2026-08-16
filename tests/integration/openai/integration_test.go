@@ -135,9 +135,10 @@ func TestOfficialNodeSDKValidationBoundary(t *testing.T) {
 		t.Fatalf("validation-enabled SDK runner failed: %v\n%s", err, output)
 	}
 	var result struct {
-		Passed int `json:"passed"`
+		Passed          int  `json:"passed"`
+		InvalidRejected bool `json:"invalidRejected"`
 	}
-	if err := json.Unmarshal(output, &result); err != nil || result.Passed != 4 {
+	if err := json.Unmarshal(output, &result); err != nil || result.Passed != 4 || !result.InvalidRejected {
 		t.Fatalf("validation result=%s err=%v", output, err)
 	}
 	requests := validated.Requests()

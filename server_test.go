@@ -1,6 +1,7 @@
 package aiservershell_test
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -24,6 +25,30 @@ func TestServerMountsIndependentHandlers(t *testing.T) {
 	}
 }
 
+type lifecycleHandler struct {
+	http.Handler
+	shutdown bool
+}
+
+func (h *lifecycleHandler) Shutdown(context.Context) error {
+	h.shutdown = true
+	return nil
+}
+
+func TestServerShutsDownMountedProtocolHandlers(t *testing.T) {
+	handler := &lifecycleHandler{Handler: http.NotFoundHandler()}
+	server, err := aiservershell.New(aiservershell.WithHandler("/", handler))
+	if err != nil {
+		t.Fatal(err)
+	}
+	if err := server.Shutdown(context.Background()); err != nil {
+		t.Fatal(err)
+	}
+	if !handler.shutdown {
+		t.Fatal("mounted handler was not shut down")
+	}
+}
+
 func TestServerRejectsDuplicatePattern(t *testing.T) {
 	handler := http.HandlerFunc(func(http.ResponseWriter, *http.Request) {})
 	if _, err := aiservershell.New(
@@ -31,6 +56,16 @@ func TestServerRejectsDuplicatePattern(t *testing.T) {
 		aiservershell.WithHandler("/", handler),
 	); err == nil {
 		t.Fatal("duplicate pattern was accepted")
+	}
+}
+
+func TestServerRejectsConflictingPatternsWithoutPanic(t *testing.T) {
+	handler := http.NotFoundHandler()
+	if _, err := aiservershell.New(
+		aiservershell.WithHandler("/{first}", handler),
+		aiservershell.WithHandler("/{second}", handler),
+	); err == nil {
+		t.Fatal("conflicting patterns were accepted")
 	}
 }
 

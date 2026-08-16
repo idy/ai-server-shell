@@ -18,19 +18,32 @@ import (
 	"github.com/idy/ai-server-shell/openai/internal/profile"
 )
 
-type handler struct {
-	services backend.Services
-	config   contract.Config
+type Handler struct {
+	services     backend.Services
+	config       contract.Config
+	mu           sync.Mutex
+	shuttingDown bool
+	nextSession  uint64
+	active       map[uint64]context.CancelFunc
+	shutdownDone chan struct{}
+	shutdownOnce sync.Once
 }
 
-func New(services backend.Services, config contract.Config) http.Handler {
-	return &handler{services: services, config: config}
+func New(services backend.Services, config contract.Config) *Handler {
+	return &Handler{
+		services: services, config: config, active: make(map[uint64]context.CancelFunc),
+		shutdownDone: make(chan struct{}),
+	}
 }
 
-func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
+func (h *Handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	requestID := request.Header.Get("X-Request-Id")
 	if requestID == "" {
 		requestID = newRequestID()
+	}
+	if h.isShuttingDown() {
+		writeHTTPError(writer, requestID, http.StatusServiceUnavailable, "service_unavailable_error", "The handler is shutting down.")
+		return
 	}
 	callerID, err := h.config.Authenticate(request.Context(), request, requestID)
 	if err != nil {
@@ -81,6 +94,13 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 
 	ctx, cancel := context.WithCancel(request.Context())
 	defer cancel()
+	sessionID, registered := h.register(cancel)
+	if !registered {
+		closeSession(session)
+		_ = connection.Close(websocket.StatusGoingAway, "server shutdown")
+		return
+	}
+	defer h.unregister(sessionID)
 	var closeOnce sync.Once
 	closeAll := func(code websocket.StatusCode, reason string) {
 		closeOnce.Do(func() {
@@ -100,6 +120,57 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 	select {
 	case <-errorsChannel:
 	case <-time.After(2 * time.Second):
+	}
+}
+
+func (h *Handler) isShuttingDown() bool {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	return h.shuttingDown
+}
+
+func (h *Handler) register(cancel context.CancelFunc) (uint64, bool) {
+	h.mu.Lock()
+	defer h.mu.Unlock()
+	if h.shuttingDown {
+		return 0, false
+	}
+	h.nextSession++
+	id := h.nextSession
+	h.active[id] = cancel
+	return id, true
+}
+
+func (h *Handler) unregister(id uint64) {
+	h.mu.Lock()
+	delete(h.active, id)
+	if h.shuttingDown && len(h.active) == 0 {
+		h.shutdownOnce.Do(func() { close(h.shutdownDone) })
+	}
+	h.mu.Unlock()
+}
+
+// Shutdown cancels all active sessions, prevents new upgrades, and waits for
+// connection handlers to finish or for ctx to expire.
+func (h *Handler) Shutdown(ctx context.Context) error {
+	h.mu.Lock()
+	h.shuttingDown = true
+	cancels := make([]context.CancelFunc, 0, len(h.active))
+	for _, cancel := range h.active {
+		cancels = append(cancels, cancel)
+	}
+	if len(h.active) == 0 {
+		h.shutdownOnce.Do(func() { close(h.shutdownDone) })
+	}
+	h.mu.Unlock()
+	for _, cancel := range cancels {
+		cancel()
+	}
+	select {
+	case <-h.shutdownDone:
+		return nil
+	case <-ctx.Done():
+		return ctx.Err()
 	}
 }
 
