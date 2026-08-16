@@ -1,0 +1,3396 @@
+[
+  {
+    "Method": "GET",
+    "Path": "/assistants",
+    "OperationID": "listAssistants",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/assistants",
+    "OperationID": "createAssistant",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/assistants/{assistant_id}",
+    "OperationID": "deleteAssistant",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/assistants/{assistant_id}",
+    "OperationID": "getAssistant",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/assistants/{assistant_id}",
+    "OperationID": "modifyAssistant",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/speech",
+    "OperationID": "createSpeech",
+    "Capability": "audio",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/octet-stream",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/transcriptions",
+    "OperationID": "createTranscription",
+    "Capability": "audio",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/translations",
+    "OperationID": "createTranslation",
+    "Capability": "audio",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/audio/voice_consents",
+    "OperationID": "listVoiceConsents",
+    "Capability": "audio",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/voice_consents",
+    "OperationID": "createVoiceConsent",
+    "Capability": "audio",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/audio/voice_consents/{consent_id}",
+    "OperationID": "deleteVoiceConsent",
+    "Capability": "audio",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/audio/voice_consents/{consent_id}",
+    "OperationID": "getVoiceConsent",
+    "Capability": "audio",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/voice_consents/{consent_id}",
+    "OperationID": "updateVoiceConsent",
+    "Capability": "audio",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/audio/voices",
+    "OperationID": "createVoice",
+    "Capability": "audio",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/batches",
+    "OperationID": "listBatches",
+    "Capability": "batches",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/batches",
+    "OperationID": "createBatch",
+    "Capability": "batches",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/batches/{batch_id}",
+    "OperationID": "retrieveBatch",
+    "Capability": "batches",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/batches/{batch_id}/cancel",
+    "OperationID": "cancelBatch",
+    "Capability": "batches",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chat/completions",
+    "OperationID": "listChatCompletions",
+    "Capability": "chat",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/chat/completions",
+    "OperationID": "createChatCompletion",
+    "Capability": "chat",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/chat/completions/{completion_id}",
+    "OperationID": "deleteChatCompletion",
+    "Capability": "chat",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chat/completions/{completion_id}",
+    "OperationID": "getChatCompletion",
+    "Capability": "chat",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/chat/completions/{completion_id}",
+    "OperationID": "updateChatCompletion",
+    "Capability": "chat",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chat/completions/{completion_id}/messages",
+    "OperationID": "getChatCompletionMessages",
+    "Capability": "chat",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/chatkit/sessions",
+    "OperationID": "CreateChatSessionMethod",
+    "Capability": "chatkit",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/chatkit/sessions/{session_id}/cancel",
+    "OperationID": "CancelChatSessionMethod",
+    "Capability": "chatkit",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chatkit/threads",
+    "OperationID": "ListThreadsMethod",
+    "Capability": "chatkit",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/chatkit/threads/{thread_id}",
+    "OperationID": "DeleteThreadMethod",
+    "Capability": "chatkit",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chatkit/threads/{thread_id}",
+    "OperationID": "GetThreadMethod",
+    "Capability": "chatkit",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/chatkit/threads/{thread_id}/items",
+    "OperationID": "ListThreadItemsMethod",
+    "Capability": "chatkit",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/completions",
+    "OperationID": "createCompletion",
+    "Capability": "completions",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/containers",
+    "OperationID": "ListContainers",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/containers",
+    "OperationID": "CreateContainer",
+    "Capability": "containers",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/containers/{container_id}",
+    "OperationID": "DeleteContainer",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/containers/{container_id}",
+    "OperationID": "RetrieveContainer",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/containers/{container_id}/files",
+    "OperationID": "ListContainerFiles",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/containers/{container_id}/files",
+    "OperationID": "CreateContainerFile",
+    "Capability": "containers",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/containers/{container_id}/files/{file_id}",
+    "OperationID": "DeleteContainerFile",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/containers/{container_id}/files/{file_id}",
+    "OperationID": "RetrieveContainerFile",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/containers/{container_id}/files/{file_id}/content",
+    "OperationID": "RetrieveContainerFileContent",
+    "Capability": "containers",
+    "RequestMedia": null,
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/content_provenance_checks",
+    "OperationID": "Createcontentprovenancecheck",
+    "Capability": "moderations",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/conversations",
+    "OperationID": "createConversation",
+    "Capability": "conversations",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/conversations/{conversation_id}",
+    "OperationID": "deleteConversation",
+    "Capability": "conversations",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/conversations/{conversation_id}",
+    "OperationID": "getConversation",
+    "Capability": "conversations",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/conversations/{conversation_id}",
+    "OperationID": "updateConversation",
+    "Capability": "conversations",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/conversations/{conversation_id}/items",
+    "OperationID": "listConversationItems",
+    "Capability": "conversations",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/conversations/{conversation_id}/items",
+    "OperationID": "createConversationItems",
+    "Capability": "conversations",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/conversations/{conversation_id}/items/{item_id}",
+    "OperationID": "deleteConversationItem",
+    "Capability": "conversations",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/conversations/{conversation_id}/items/{item_id}",
+    "OperationID": "getConversationItem",
+    "Capability": "conversations",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/embeddings",
+    "OperationID": "createEmbedding",
+    "Capability": "embeddings",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals",
+    "OperationID": "listEvals",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/evals",
+    "OperationID": "createEval",
+    "Capability": "evals",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 201
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/evals/{eval_id}",
+    "OperationID": "deleteEval",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals/{eval_id}",
+    "OperationID": "getEval",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/evals/{eval_id}",
+    "OperationID": "updateEval",
+    "Capability": "evals",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals/{eval_id}/runs",
+    "OperationID": "getEvalRuns",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/evals/{eval_id}/runs",
+    "OperationID": "createEvalRun",
+    "Capability": "evals",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 201
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/evals/{eval_id}/runs/{run_id}",
+    "OperationID": "deleteEvalRun",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals/{eval_id}/runs/{run_id}",
+    "OperationID": "getEvalRun",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/evals/{eval_id}/runs/{run_id}",
+    "OperationID": "cancelEvalRun",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals/{eval_id}/runs/{run_id}/output_items",
+    "OperationID": "getEvalRunOutputItems",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/evals/{eval_id}/runs/{run_id}/output_items/{output_item_id}",
+    "OperationID": "getEvalRunOutputItem",
+    "Capability": "evals",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/files",
+    "OperationID": "listFiles",
+    "Capability": "files",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/files",
+    "OperationID": "createFile",
+    "Capability": "files",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/files/{file_id}",
+    "OperationID": "deleteFile",
+    "Capability": "files",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/files/{file_id}",
+    "OperationID": "retrieveFile",
+    "Capability": "files",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/files/{file_id}/content",
+    "OperationID": "downloadFile",
+    "Capability": "files",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/alpha/graders/run",
+    "OperationID": "runGrader",
+    "Capability": "fine_tuning",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/alpha/graders/validate",
+    "OperationID": "validateGrader",
+    "Capability": "fine_tuning",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/fine_tuning/checkpoints/{fine_tuned_model_checkpoint}/permissions",
+    "OperationID": "listFineTuningCheckpointPermissions",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/checkpoints/{fine_tuned_model_checkpoint}/permissions",
+    "OperationID": "createFineTuningCheckpointPermission",
+    "Capability": "fine_tuning",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/fine_tuning/checkpoints/{fine_tuned_model_checkpoint}/permissions/{permission_id}",
+    "OperationID": "deleteFineTuningCheckpointPermission",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/fine_tuning/jobs",
+    "OperationID": "listPaginatedFineTuningJobs",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/jobs",
+    "OperationID": "createFineTuningJob",
+    "Capability": "fine_tuning",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}",
+    "OperationID": "retrieveFineTuningJob",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/cancel",
+    "OperationID": "cancelFineTuningJob",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/checkpoints",
+    "OperationID": "listFineTuningJobCheckpoints",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/events",
+    "OperationID": "listFineTuningEvents",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/pause",
+    "OperationID": "pauseFineTuningJob",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/fine_tuning/jobs/{fine_tuning_job_id}/resume",
+    "OperationID": "resumeFineTuningJob",
+    "Capability": "fine_tuning",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/images/edits",
+    "OperationID": "createImageEdit",
+    "Capability": "images",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/images/generations",
+    "OperationID": "createImage",
+    "Capability": "images",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/images/variations",
+    "OperationID": "createImageVariation",
+    "Capability": "images",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/models",
+    "OperationID": "listModels",
+    "Capability": "models",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/models/{model}",
+    "OperationID": "deleteModel",
+    "Capability": "models",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/models/{model}",
+    "OperationID": "retrieveModel",
+    "Capability": "models",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/moderations",
+    "OperationID": "createModeration",
+    "Capability": "moderations",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/admin_api_keys",
+    "OperationID": "admin-api-keys-list",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/admin_api_keys",
+    "OperationID": "admin-api-keys-create",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/admin_api_keys/{key_id}",
+    "OperationID": "admin-api-keys-delete",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/admin_api_keys/{key_id}",
+    "OperationID": "admin-api-keys-get",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/audit_logs",
+    "OperationID": "list-audit-logs",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/certificates",
+    "OperationID": "listOrganizationCertificates",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/certificates",
+    "OperationID": "uploadCertificate",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/certificates/activate",
+    "OperationID": "activateOrganizationCertificates",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/certificates/deactivate",
+    "OperationID": "deactivateOrganizationCertificates",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/certificates/{certificate_id}",
+    "OperationID": "deleteCertificate",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/certificates/{certificate_id}",
+    "OperationID": "getCertificate",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/certificates/{certificate_id}",
+    "OperationID": "modifyCertificate",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/costs",
+    "OperationID": "usage-costs",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/data_retention",
+    "OperationID": "retrieve-organization-data-retention",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/data_retention",
+    "OperationID": "update-organization-data-retention",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups",
+    "OperationID": "list-groups",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/groups",
+    "OperationID": "create-group",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/groups/{group_id}",
+    "OperationID": "delete-group",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups/{group_id}",
+    "OperationID": "retrieve-group",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/groups/{group_id}",
+    "OperationID": "update-group",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups/{group_id}/roles",
+    "OperationID": "list-group-role-assignments",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/groups/{group_id}/roles",
+    "OperationID": "assign-group-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/groups/{group_id}/roles/{role_id}",
+    "OperationID": "unassign-group-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups/{group_id}/roles/{role_id}",
+    "OperationID": "retrieve-group-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups/{group_id}/users",
+    "OperationID": "list-group-users",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/groups/{group_id}/users",
+    "OperationID": "add-group-user",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/groups/{group_id}/users/{user_id}",
+    "OperationID": "remove-group-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/groups/{group_id}/users/{user_id}",
+    "OperationID": "retrieve-group-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/invites",
+    "OperationID": "list-invites",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/invites",
+    "OperationID": "inviteUser",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/invites/{invite_id}",
+    "OperationID": "delete-invite",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/invites/{invite_id}",
+    "OperationID": "retrieve-invite",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects",
+    "OperationID": "list-projects",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects",
+    "OperationID": "create-project",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}",
+    "OperationID": "retrieve-project",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}",
+    "OperationID": "modify-project",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/api_keys",
+    "OperationID": "list-project-api-keys",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/api_keys/{api_key_id}",
+    "OperationID": "delete-project-api-key",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/api_keys/{api_key_id}",
+    "OperationID": "retrieve-project-api-key",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/archive",
+    "OperationID": "archive-project",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/certificates",
+    "OperationID": "listProjectCertificates",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/certificates/activate",
+    "OperationID": "activateProjectCertificates",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/certificates/deactivate",
+    "OperationID": "deactivateProjectCertificates",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/data_retention",
+    "OperationID": "retrieve-project-data-retention",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/data_retention",
+    "OperationID": "update-project-data-retention",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/groups",
+    "OperationID": "list-project-groups",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/groups",
+    "OperationID": "add-project-group",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/groups/{group_id}",
+    "OperationID": "remove-project-group",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/groups/{group_id}",
+    "OperationID": "retrieve-project-group",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/hosted_tool_permissions",
+    "OperationID": "retrieve-project-hosted-tool-permissions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/hosted_tool_permissions",
+    "OperationID": "update-project-hosted-tool-permissions",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/model_permissions",
+    "OperationID": "delete-project-model-permissions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/model_permissions",
+    "OperationID": "retrieve-project-model-permissions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/model_permissions",
+    "OperationID": "update-project-model-permissions",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/rate_limits",
+    "OperationID": "list-project-rate-limits",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/rate_limits/{rate_limit_id}",
+    "OperationID": "update-project-rate-limits",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/service_accounts",
+    "OperationID": "list-project-service-accounts",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/service_accounts",
+    "OperationID": "create-project-service-account",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/service_accounts/{service_account_id}",
+    "OperationID": "delete-project-service-account",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/service_accounts/{service_account_id}",
+    "OperationID": "retrieve-project-service-account",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/service_accounts/{service_account_id}",
+    "OperationID": "update-project-service-account",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/service_accounts/{service_account_id}/api_keys",
+    "OperationID": "CreateanAPIkeyforaserviceaccount",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/spend_alerts",
+    "OperationID": "list-project-spend-alerts",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/spend_alerts",
+    "OperationID": "create-project-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/spend_alerts/{alert_id}",
+    "OperationID": "delete-project-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/spend_alerts/{alert_id}",
+    "OperationID": "retrieve-project-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/spend_alerts/{alert_id}",
+    "OperationID": "update-project-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/spend_limit",
+    "OperationID": "Deleteprojectspendlimit",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/spend_limit",
+    "OperationID": "Getprojectspendlimit",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/spend_limit",
+    "OperationID": "Updateprojectspendlimit",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/users",
+    "OperationID": "list-project-users",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/users",
+    "OperationID": "create-project-user",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/projects/{project_id}/users/{user_id}",
+    "OperationID": "delete-project-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/projects/{project_id}/users/{user_id}",
+    "OperationID": "retrieve-project-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/projects/{project_id}/users/{user_id}",
+    "OperationID": "modify-project-user",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/roles",
+    "OperationID": "list-roles",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/roles",
+    "OperationID": "create-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/roles/{role_id}",
+    "OperationID": "delete-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/roles/{role_id}",
+    "OperationID": "retrieve-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/roles/{role_id}",
+    "OperationID": "update-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/spend_alerts",
+    "OperationID": "list-organization-spend-alerts",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/spend_alerts",
+    "OperationID": "create-organization-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/spend_alerts/{alert_id}",
+    "OperationID": "delete-organization-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/spend_alerts/{alert_id}",
+    "OperationID": "retrieve-organization-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/spend_alerts/{alert_id}",
+    "OperationID": "update-organization-spend-alert",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/spend_limit",
+    "OperationID": "Deleteorganizationspendlimit",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/spend_limit",
+    "OperationID": "Getorganizationspendlimit",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/spend_limit",
+    "OperationID": "Updateorganizationspendlimit",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/audio_speeches",
+    "OperationID": "usage-audio-speeches",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/audio_transcriptions",
+    "OperationID": "usage-audio-transcriptions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/code_interpreter_sessions",
+    "OperationID": "usage-code-interpreter-sessions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/completions",
+    "OperationID": "usage-completions",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/embeddings",
+    "OperationID": "usage-embeddings",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/file_search_calls",
+    "OperationID": "usage-file-search-calls",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/images",
+    "OperationID": "usage-images",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/moderations",
+    "OperationID": "usage-moderations",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/vector_stores",
+    "OperationID": "usage-vector-stores",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/usage/web_search_calls",
+    "OperationID": "usage-web-search-calls",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/users",
+    "OperationID": "list-users",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/users/{user_id}",
+    "OperationID": "delete-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/users/{user_id}",
+    "OperationID": "retrieve-user",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/users/{user_id}",
+    "OperationID": "modify-user",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/users/{user_id}/roles",
+    "OperationID": "list-user-role-assignments",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/organization/users/{user_id}/roles",
+    "OperationID": "assign-user-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/organization/users/{user_id}/roles/{role_id}",
+    "OperationID": "unassign-user-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/organization/users/{user_id}/roles/{role_id}",
+    "OperationID": "retrieve-user-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/groups/{group_id}/roles",
+    "OperationID": "list-project-group-role-assignments",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/projects/{project_id}/groups/{group_id}/roles",
+    "OperationID": "assign-project-group-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/projects/{project_id}/groups/{group_id}/roles/{role_id}",
+    "OperationID": "unassign-project-group-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/groups/{group_id}/roles/{role_id}",
+    "OperationID": "retrieve-project-group-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/roles",
+    "OperationID": "list-project-roles",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/projects/{project_id}/roles",
+    "OperationID": "create-project-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/projects/{project_id}/roles/{role_id}",
+    "OperationID": "delete-project-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/roles/{role_id}",
+    "OperationID": "retrieve-project-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/projects/{project_id}/roles/{role_id}",
+    "OperationID": "update-project-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/users/{user_id}/roles",
+    "OperationID": "list-project-user-role-assignments",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/projects/{project_id}/users/{user_id}/roles",
+    "OperationID": "assign-project-user-role",
+    "Capability": "organization",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/projects/{project_id}/users/{user_id}/roles/{role_id}",
+    "OperationID": "unassign-project-user-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/projects/{project_id}/users/{user_id}/roles/{role_id}",
+    "OperationID": "retrieve-project-user-role",
+    "Capability": "organization",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/calls",
+    "OperationID": "create-realtime-call",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/sdp",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/sdp"
+    ],
+    "SuccessStatus": 201
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/calls/{call_id}/accept",
+    "OperationID": "accept-realtime-call",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/calls/{call_id}/hangup",
+    "OperationID": "hangup-realtime-call",
+    "Capability": "realtime",
+    "RequestMedia": null,
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/calls/{call_id}/refer",
+    "OperationID": "refer-realtime-call",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/calls/{call_id}/reject",
+    "OperationID": "reject-realtime-call",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": null,
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/client_secrets",
+    "OperationID": "create-realtime-client-secret",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/sessions",
+    "OperationID": "create-realtime-session",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/transcription_sessions",
+    "OperationID": "create-realtime-transcription-session",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/realtime/translations/client_secrets",
+    "OperationID": "create-realtime-translation-client-secret",
+    "Capability": "realtime",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses",
+    "OperationID": "createResponse",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/compact",
+    "OperationID": "Compactconversation",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/compact?beta=true",
+    "OperationID": "beta_Compactconversation",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/input_tokens",
+    "OperationID": "Getinputtokencounts",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/input_tokens?beta=true",
+    "OperationID": "beta_Getinputtokencounts",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/responses/{response_id}",
+    "OperationID": "deleteResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/responses/{response_id}",
+    "OperationID": "getResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/{response_id}/cancel",
+    "OperationID": "cancelResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses/{response_id}/cancel?beta=true",
+    "OperationID": "beta_cancelResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/responses/{response_id}/input_items",
+    "OperationID": "listInputItems",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/responses/{response_id}/input_items?beta=true",
+    "OperationID": "beta_listInputItems",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/responses/{response_id}?beta=true",
+    "OperationID": "beta_deleteResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/responses/{response_id}?beta=true",
+    "OperationID": "beta_getResponse",
+    "Capability": "responses",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/responses?beta=true",
+    "OperationID": "beta_createResponse",
+    "Capability": "responses",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json",
+      "text/event-stream"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills",
+    "OperationID": "ListSkills",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/skills",
+    "OperationID": "CreateSkill",
+    "Capability": "skills",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/skills/{skill_id}",
+    "OperationID": "DeleteSkill",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills/{skill_id}",
+    "OperationID": "GetSkill",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/skills/{skill_id}",
+    "OperationID": "UpdateSkillDefaultVersion",
+    "Capability": "skills",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills/{skill_id}/content",
+    "OperationID": "GetSkillContent",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json",
+      "application/zip"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills/{skill_id}/versions",
+    "OperationID": "ListSkillVersions",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/skills/{skill_id}/versions",
+    "OperationID": "CreateSkillVersion",
+    "Capability": "skills",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/skills/{skill_id}/versions/{version}",
+    "OperationID": "DeleteSkillVersion",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills/{skill_id}/versions/{version}",
+    "OperationID": "GetSkillVersion",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/skills/{skill_id}/versions/{version}/content",
+    "OperationID": "GetSkillVersionContent",
+    "Capability": "skills",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json",
+      "application/zip"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads",
+    "OperationID": "createThread",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/runs",
+    "OperationID": "createThreadAndRun",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/threads/{thread_id}",
+    "OperationID": "deleteThread",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}",
+    "OperationID": "getThread",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}",
+    "OperationID": "modifyThread",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/messages",
+    "OperationID": "listMessages",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/messages",
+    "OperationID": "createMessage",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/threads/{thread_id}/messages/{message_id}",
+    "OperationID": "deleteMessage",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/messages/{message_id}",
+    "OperationID": "getMessage",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/messages/{message_id}",
+    "OperationID": "modifyMessage",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/runs",
+    "OperationID": "listRuns",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/runs",
+    "OperationID": "createRun",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/runs/{run_id}",
+    "OperationID": "getRun",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/runs/{run_id}",
+    "OperationID": "modifyRun",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/runs/{run_id}/cancel",
+    "OperationID": "cancelRun",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/runs/{run_id}/steps",
+    "OperationID": "listRunSteps",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/threads/{thread_id}/runs/{run_id}/steps/{step_id}",
+    "OperationID": "getRunStep",
+    "Capability": "assistants",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/threads/{thread_id}/runs/{run_id}/submit_tool_outputs",
+    "OperationID": "submitToolOuputsToRun",
+    "Capability": "assistants",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/uploads",
+    "OperationID": "createUpload",
+    "Capability": "uploads",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/uploads/{upload_id}/cancel",
+    "OperationID": "cancelUpload",
+    "Capability": "uploads",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/uploads/{upload_id}/complete",
+    "OperationID": "completeUpload",
+    "Capability": "uploads",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/uploads/{upload_id}/parts",
+    "OperationID": "addUploadPart",
+    "Capability": "uploads",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores",
+    "OperationID": "listVectorStores",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores",
+    "OperationID": "createVectorStore",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/vector_stores/{vector_store_id}",
+    "OperationID": "deleteVectorStore",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}",
+    "OperationID": "getVectorStore",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}",
+    "OperationID": "modifyVectorStore",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}/file_batches",
+    "OperationID": "createVectorStoreFileBatch",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}/file_batches/{batch_id}",
+    "OperationID": "getVectorStoreFileBatch",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}/file_batches/{batch_id}/cancel",
+    "OperationID": "cancelVectorStoreFileBatch",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}/file_batches/{batch_id}/files",
+    "OperationID": "listFilesInVectorStoreBatch",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}/files",
+    "OperationID": "listVectorStoreFiles",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}/files",
+    "OperationID": "createVectorStoreFile",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/vector_stores/{vector_store_id}/files/{file_id}",
+    "OperationID": "deleteVectorStoreFile",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}/files/{file_id}",
+    "OperationID": "getVectorStoreFile",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}/files/{file_id}",
+    "OperationID": "updateVectorStoreFileAttributes",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/vector_stores/{vector_store_id}/files/{file_id}/content",
+    "OperationID": "retrieveVectorStoreFileContent",
+    "Capability": "vector_stores",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/vector_stores/{vector_store_id}/search",
+    "OperationID": "searchVectorStore",
+    "Capability": "vector_stores",
+    "RequestMedia": [
+      "application/json"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/videos",
+    "OperationID": "ListVideos",
+    "Capability": "videos",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/videos",
+    "OperationID": "createVideo",
+    "Capability": "videos",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/videos/characters",
+    "OperationID": "CreateVideoCharacter",
+    "Capability": "videos",
+    "RequestMedia": [
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/videos/characters/{character_id}",
+    "OperationID": "GetVideoCharacter",
+    "Capability": "videos",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/videos/edits",
+    "OperationID": "CreateVideoEdit",
+    "Capability": "videos",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/videos/extensions",
+    "OperationID": "CreateVideoExtend",
+    "Capability": "videos",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "DELETE",
+    "Path": "/videos/{video_id}",
+    "OperationID": "DeleteVideo",
+    "Capability": "videos",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/videos/{video_id}",
+    "OperationID": "GetVideo",
+    "Capability": "videos",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "GET",
+    "Path": "/videos/{video_id}/content",
+    "OperationID": "RetrieveVideoContent",
+    "Capability": "videos",
+    "RequestMedia": null,
+    "ResponseMedia": [
+      "application/json",
+      "image/webp",
+      "video/mp4"
+    ],
+    "SuccessStatus": 200
+  },
+  {
+    "Method": "POST",
+    "Path": "/videos/{video_id}/remix",
+    "OperationID": "CreateVideoRemix",
+    "Capability": "videos",
+    "RequestMedia": [
+      "application/json",
+      "multipart/form-data"
+    ],
+    "ResponseMedia": [
+      "application/json"
+    ],
+    "SuccessStatus": 200
+  }
+]
