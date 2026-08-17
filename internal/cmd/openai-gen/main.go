@@ -12,6 +12,7 @@ import (
 	"go/format"
 	"os"
 	"path/filepath"
+	"slices"
 	"sort"
 	"strconv"
 	"strings"
@@ -310,10 +311,8 @@ func successStatus(responses map[string]response) int {
 }
 
 func appendUnique(values []string, candidate string) []string {
-	for _, value := range values {
-		if value == candidate {
-			return values
-		}
+	if slices.Contains(values, candidate) {
+		return values
 	}
 	return append(values, candidate)
 }

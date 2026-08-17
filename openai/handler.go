@@ -113,11 +113,11 @@ func credentialFromRequest(request *http.Request) (string, string) {
 		return strings.TrimSpace(authorization[len("Bearer "):]), "authorization"
 	}
 	for _, protocol := range request.Header.Values("Sec-WebSocket-Protocol") {
-		for _, candidate := range strings.Split(protocol, ",") {
+		for candidate := range strings.SplitSeq(protocol, ",") {
 			candidate = strings.TrimSpace(candidate)
 			const prefix = "openai-insecure-api-key."
-			if strings.HasPrefix(candidate, prefix) {
-				return strings.TrimPrefix(candidate, prefix), "websocket_subprotocol"
+			if after, ok := strings.CutPrefix(candidate, prefix); ok {
+				return after, "websocket_subprotocol"
 			}
 		}
 	}

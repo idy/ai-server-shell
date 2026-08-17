@@ -15,6 +15,13 @@ Requirements:
 
 - Go 1.24 or later
 - Node.js 22 or later for official SDK compatibility tests
+- `modernize` from `golang.org/x/tools` v0.42.0
+
+Install the pinned analyzer:
+
+```sh
+go install golang.org/x/tools/go/analysis/passes/modernize/cmd/modernize@v0.42.0
+```
 
 Run the Go checks:
 
@@ -22,6 +29,7 @@ Run the Go checks:
 go test ./...
 go test -race ./...
 go vet ./...
+modernize ./...
 ```
 
 Run the complete credential-free gate with `make verify`. Changes to the frozen
