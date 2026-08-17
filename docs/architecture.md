@@ -1,98 +1,37 @@
 # Architecture
 
-## Purpose
+The dependency direction is deliberately one-way:
 
-AI Server Shell is a protocol framework for implementing OpenAI-compatible servers in Go. It is deliberately positioned between client SDKs and application-defined behavior.
-
-It is the reverse of a client SDK:
-
-- A client SDK converts method calls into protocol messages.
-- AI Server Shell converts protocol messages into application service calls.
-
-## Ownership boundary
-
-### The shell owns
-
-- HTTP routes and transport negotiation.
-- WebSocket, SSE, and future WebRTC protocol adapters.
-- Authentication integration points.
-- Request and event decoding.
-- Protocol validation and error serialization.
-- Connection and session lifecycle.
-- Event ordering and identifier generation where required by the protocol.
-- Cancellation propagation.
-- Bounded queues, backpressure, and shutdown behavior.
-- Compatibility fixtures and client-SDK conformance tests.
-
-### An application owns
-
-- Agent orchestration.
-- Model inference or model gateway calls.
-- Prompts and instructions.
-- Function and tool execution.
-- Conversation persistence and long-term memory.
-- Domain data and authorization decisions.
-- Safety policy and product behavior.
-- The semantic content of emitted responses.
-
-The shell must not import or depend on application packages.
-
-## Service model
-
-API surfaces are registered independently. Applications implement only the services they need.
-
-```go
-type Services struct {
-	Realtime  realtime.Service
-	Responses responses.Service
-	Chat      chat.Service
-}
+```text
+OpenAI SDK -> openai.Handler -> backend.Services -> application backend
+future SDK -> future handler -> backend.Services -> same application backend
 ```
 
-An unregistered service does not expose its routes.
+The shell owns protocol parsing, route/schema validation, safe header mapping,
+response/error formatting, bounded request bodies, streaming, cancellation,
+WebSocket coordination, and connection cleanup. Applications own all semantics:
+model execution, agents, tools, memory, persistence, authorization decisions,
+and resource state.
 
-## Realtime session model
+`backend` imports no wire-protocol package. Values keep canonical operation and
+capability identities, detached metadata, JSON documents, or opaque media bytes.
+Protocol-specific fields remain in raw JSON or namespaced metadata so future
+handlers can map them without making application implementations import an
+OpenAI type.
 
-The Realtime service creates one application session per accepted protocol session.
+`backend.Services` is validated and copied once. A default handler may serve all
+unary capabilities, while explicit capability registrations override it. The
+same concrete object can be registered repeatedly. Realtime and Responses
+WebSocket sessions use separate injection slots because their lifecycle differs
+from unary HTTP calls.
 
-```go
-type Service interface {
-	Open(context.Context, OpenRequest) (Session, error)
-}
+The aggregate `aiservershell.Server` only mounts independently constructed
+`http.Handler` values. It does not own listeners or application backends.
+Its `Shutdown` method delegates to mounted handlers that implement the same
+lifecycle contract. The application remains responsible for shutting down its
+`http.Server`. The OpenAI handler rejects new WebSocket upgrades, cancels all
+accepted sessions, and waits until they exit or the shutdown context expires;
+ordinary HTTP and SSE work remains tied to the request context.
 
-type Session interface {
-	Handle(context.Context, ClientEvent) error
-	Events() <-chan ServerEvent
-	Close(context.Context) error
-}
-```
-
-The transport reader decodes client events and calls `Handle`. A dedicated writer drains `Events`, validates server events, and writes them to the client. Cancellation of the connection context must stop both directions.
-
-## Protocol profiles
-
-OpenAI APIs evolve. The shell should define explicit, versioned protocol profiles rather than using an unqualified `compatible` boolean.
-
-Each profile records:
-
-- supported routes;
-- supported client events;
-- supported server events;
-- accepted legacy aliases;
-- unknown-field behavior;
-- tested SDK names and versions;
-- documented deviations.
-
-## Extension policy
-
-Applications may attach namespaced metadata and extension events when a negotiated profile allows them. Project-owned extensions must not collide with OpenAI event names. Unknown fields should be preserved when safe so newer clients do not fail solely because the shell has not promoted a field into a typed Go structure.
-
-## Reliability principles
-
-1. Every connection has a bounded memory budget.
-2. Slow consumers create explicit backpressure or a documented close condition.
-3. Cancellation is response-scoped whenever the wire protocol carries a response identifier.
-4. Terminal events are emitted at most once per response.
-5. Session close is idempotent.
-6. Protocol errors do not panic the server.
-7. No compatibility claim is accepted without a black-box client test.
+Mount patterns use `http.ServeMux` syntax. Invalid, duplicate, or mutually
+conflicting patterns fail construction instead of panicking while serving.

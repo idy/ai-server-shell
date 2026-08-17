@@ -1,151 +1,82 @@
-<div align="center">
-  <img src="assets/ai-server-shell.png" alt="AI Server Shell logo" width="220" />
+# AI Server Shell
 
-  # AI Server Shell
+AI Server Shell is a Go framework for exposing application-defined AI behavior
+through SDK-compatible server protocols. The shell owns routing, validation,
+authentication hooks, HTTP/SSE/WebSocket lifecycle, and OpenAI-shaped errors;
+your backend owns models, agents, tools, memory, persistence, and business logic.
 
-  **A pluggable Go server shell for building OpenAI-compatible APIs.**
+Milestone 1 freezes the OpenAI handler to 182 paths and 288 operations from
+`openai/openai-openapi` commit `2186421dca0cca7c1e67caa7739005e8b1ccc4dd`,
+plus the Realtime and Responses WebSocket unions in official Node SDK `v7.4.0`.
+Anthropic and Gemini handlers are future work and will consume the same
+protocol-neutral `backend.Services` registry.
 
-  [![Go](https://img.shields.io/badge/Go-1.24%2B-00ADD8?logo=go&logoColor=white)](https://go.dev/)
-  [![License](https://img.shields.io/badge/License-Apache--2.0-blue.svg)](LICENSE)
-  [![Status](https://img.shields.io/badge/status-designing-orange)](#project-status)
-</div>
+## Use it
 
-AI Server Shell is the server-side counterpart to an OpenAI client SDK. It owns the wire protocol, routes, streaming transports, typed events, validation, lifecycle, and error mapping. Applications provide the behavior by implementing small Go interfaces.
-
-The goal is simple: point an existing OpenAI SDK at a different endpoint and run your own agent, model gateway, memory system, tools, or domain runtime behind it.
-
-> [!IMPORTANT]
-> This repository is in its design and M0 phase. No compatibility guarantee is made until the conformance suite is published and passing.
-
-## Why this project exists
-
-The Go ecosystem has excellent OpenAI clients, model gateways, proxies, and inference servers. What is missing is a focused server framework with a gRPC-like integration model:
-
-1. AI Server Shell implements the OpenAI-compatible protocol surface.
-2. A developer implements service interfaces.
-3. Existing OpenAI clients connect by changing their base URL.
-
-AI Server Shell is not an agent framework and does not require a particular model provider.
-
-## Intended developer experience
-
-The following API is a design target, not yet a released contract:
+Implement the public backend contract, inject one object for every capability
+or selected objects for individual capabilities, then construct a normal
+`http.Handler`:
 
 ```go
-type TutorRealtime struct{}
-
-func (t *TutorRealtime) Open(
-	ctx context.Context,
-	req realtime.OpenRequest,
-) (realtime.Session, error) {
-	return newTutorSession(req), nil
-}
-
-shell := aiservershell.New(
-	aiservershell.WithRealtime(&TutorRealtime{}),
-	aiservershell.WithAuthenticator(authenticator),
+services, err := backend.NewServices(
+    backend.WithHandler(app),
+    backend.WithRealtime(app),
+    backend.WithResponsesWebSocket(app),
 )
+if err != nil {
+    log.Fatal(err)
+}
 
-log.Fatal(http.ListenAndServe(":8080", shell))
+handler, err := openai.NewHandler(services)
+if err != nil {
+    log.Fatal(err)
+}
+log.Fatal(http.ListenAndServe(":8080", handler))
 ```
 
-The session implementation receives typed client events and emits typed server events:
+`backend.Handler` receives a canonical capability, stable operation ID,
+metadata, path/query parameters, and bounded JSON or opaque bytes. A missing
+capability returns a stable OpenAI-shaped `501`; it is not silently simulated.
+Bidirectional sessions implement `backend.SessionBackend` and `backend.Session`.
+
+The optional root aggregate mounts already-constructed protocol handlers and
+does not introduce another backend contract:
 
 ```go
-type Session interface {
-	Handle(context.Context, ClientEvent) error
-	Events() <-chan ServerEvent
-	Close(context.Context) error
-}
+shell, err := aiservershell.New(
+    aiservershell.WithHandler("/v1/", handler),
+)
 ```
 
-## Architecture
+The application owns the listener. During graceful shutdown, stop the
+`http.Server` and call `shell.Shutdown(ctx)`; the latter prevents new protocol
+upgrades, cancels active OpenAI WebSocket sessions, and waits for them to exit.
+Unary HTTP and SSE calls follow their request contexts.
 
-```mermaid
-flowchart LR
-    C["Official or compatible OpenAI SDK"]
-    S["AI Server Shell"]
-    A["Application service interfaces"]
-    R["Custom agent or runtime"]
-    M["Models, tools, memory, and data"]
+See [`examples/minimal`](examples/minimal/main.go),
+[`docs/backend-contract.md`](docs/backend-contract.md), and
+[`docs/openai-compatibility.md`](docs/openai-compatibility.md).
 
-    C <-->|"OpenAI-compatible HTTP, SSE, WebSocket, or WebRTC"| S
-    S <-->|"Typed requests, events, streams, and errors"| A
-    A --> R
-    R --> M
+## Validate it
+
+```sh
+make verify
+
+# Opt-in live, read-only differential check. Requires OPENAI_API_KEY.
+OPENAI_COMPAT_PROFILE=safe make compatibility-safe
 ```
 
-AI Server Shell owns the protocol boundary. Application code owns semantics.
+`make verify` regenerates the frozen profile, rejects drift, runs unit/race/vet,
+installs the pinned official SDK, and drives it through real local listeners.
+The local suite requires no network credential. Live tests keep the incoming
+Shell credential separate from the upstream key and never forward it.
 
-See [Architecture](docs/architecture.md) for ownership rules and [M0](docs/m0.md) for the first milestone.
+## Compatibility boundary
 
-## M0 scope
-
-M0 focuses on the OpenAI Realtime WebSocket server shell:
-
-- `GET /v1/realtime`
-- WebSocket upgrade and connection lifecycle
-- typed client and server event envelopes
-- session creation, update, cancellation, and close
-- text conversation items and streaming text output
-- function calls and function call outputs
-- bounded buffering and backpressure behavior
-- authentication hooks
-- protocol errors and close-code mapping
-- black-box conformance tests using an official OpenAI JavaScript client
-
-Audio, WebRTC, Responses, Chat Completions, Files, and Batch APIs are intentionally staged after the core Realtime contract is proven.
-
-## Goals
-
-- Drop-in compatibility at the wire boundary, verified by conformance tests.
-- Small, transport-independent Go interfaces.
-- No dependency on a specific model, agent, database, or cloud.
-- Optional services: applications implement only the API surfaces they expose.
-- Unknown-field preservation where compatibility requires forward tolerance.
-- Explicit cancellation, ordering, backpressure, and shutdown semantics.
-- Stable protocol types separated from application implementations.
-
-## Non-goals
-
-- Loading or running models.
-- Acting as an LLM gateway or upstream proxy.
-- Providing a built-in agent loop, memory database, or tool catalog.
-- Requiring applications to adopt an opinionated media pipeline.
-- Claiming compatibility without tests against stock client SDKs.
-
-## Planned packages
-
-```text
-ai-server-shell/
-├── realtime/             # Realtime service contracts and event types
-├── transport/websocket/  # WebSocket protocol adapter
-├── transport/webrtc/     # Future WebRTC signaling and data transport
-├── responses/            # Future Responses service contract
-├── chat/                 # Future Chat Completions service contract
-├── internal/conformance/ # Black-box and golden protocol fixtures
-└── docs/                 # Architecture, milestones, and compatibility notes
-```
-
-## Compatibility policy
-
-Compatibility is a tested property, not a marketing label. A surface is marked supported only when:
-
-1. Its supported event or endpoint subset is documented.
-2. Golden wire fixtures pass.
-3. A stock OpenAI client SDK passes black-box tests using only endpoint and credential changes.
-4. Unsupported fields or events fail predictably or round-trip safely.
-
-The project will publish a versioned compatibility matrix as the protocol surface grows.
-
-## Project status
-
-The repository currently contains the project charter and initial Go contracts. M0 implementation work has not started. Expect breaking API changes until the first tagged release.
-
-## Contributing
-
-Design feedback and focused contributions are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before opening an issue or pull request. Security concerns should follow [SECURITY.md](SECURITY.md).
-
-## License
+The committed route and event inventories are reproducible coverage inputs, not
+a promise to adopt later upstream changes automatically. Unknown fields inside
+known events are preserved. Unknown routes are 404; frozen routes with missing
+backend capabilities are 501. Current limitations and live evidence are stated
+in [`docs/openai-compatibility.md`](docs/openai-compatibility.md).
 
 Licensed under the [Apache License 2.0](LICENSE).

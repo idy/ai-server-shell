@@ -1,0 +1,69 @@
+name: OpenAI compatibility
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: Compatibility profile
+        required: true
+        default: safe
+        type: choice
+        options: [safe, full]
+      allow_mutation:
+        description: Required for the full profile
+        required: true
+        default: false
+        type: boolean
+  schedule:
+    - cron: "17 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  safe:
+    if: github.event_name == 'schedule' || inputs.profile == 'safe'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/sdk/openai-node/package-lock.json
+      - run: npm --prefix tests/sdk/openai-node ci
+      - run: go test -tags=compatibility -v ./tests/compatibility/openai | tee compatibility-safe.txt
+        env:
+          OPENAI_COMPAT_PROFILE: safe
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-compatibility-safe
+          path: compatibility-safe.txt
+  full:
+    if: github.event_name == 'workflow_dispatch' && inputs.profile == 'full' && inputs.allow_mutation
+    runs-on: ubuntu-latest
+    environment: openai-compatibility-full
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm --prefix tests/sdk/openai-node ci
+      - run: go test -tags=compatibility -v ./tests/compatibility/openai | tee compatibility-full.txt
+        env:
+          OPENAI_COMPAT_PROFILE: full
+          OPENAI_COMPAT_ALLOW_MUTATION: "1"
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: openai-compatibility-full
+          path: compatibility-full.txt

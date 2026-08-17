@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  go-and-sdk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+          cache: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: tests/sdk/openai-node/package-lock.json
+      - run: npm --prefix tests/sdk/openai-node ci
+      - run: go generate ./...
+      - run: git diff --exit-code
+      - run: go test ./...
+      - run: go test -race ./...
+      - run: go vet ./...
+      - run: go test -tags=integration ./tests/integration/openai
