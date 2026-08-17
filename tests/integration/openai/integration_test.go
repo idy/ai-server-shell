@@ -71,8 +71,11 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 	if result.Expected != 288 || result.Passed != result.Expected || result.HelperCases != 280 || result.RawCases != 8 || len(result.Failures) != 0 || len(result.NegativeCases) != 1 || len(result.StreamCases) != 1 {
 		t.Fatalf("official SDK semantic cases: expected=%d passed=%d failures=%v backend_errors=%v", result.Expected, result.Passed, result.Failures, fake.Errors())
 	}
-	if got := len(fake.Requests()); got != 289 {
-		t.Fatalf("backend request count = %d, want 289", got)
+	// Negative cases are rejected by Shell validation before FakeBackend.Handle;
+	// only the manifest cases and successful streaming scenarios dispatch here.
+	wantBackendRequests := result.Expected + len(result.StreamCases)
+	if got := len(fake.Requests()); got != wantBackendRequests {
+		t.Fatalf("backend request count = %d, want %d (%d manifest + %d stream)", got, wantBackendRequests, result.Expected, len(result.StreamCases))
 	}
 	seen := make(map[string]int, 288)
 	media := make(map[string]bool)
