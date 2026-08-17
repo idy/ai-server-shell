@@ -2,7 +2,6 @@
 
 [![Test](https://github.com/idy/ai-server-shell/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/idy/ai-server-shell/actions/workflows/test.yml)
 [![Go Reference](https://pkg.go.dev/badge/github.com/idy/ai-server-shell.svg)](https://pkg.go.dev/github.com/idy/ai-server-shell)
-[![Go Report Card](https://goreportcard.com/badge/github.com/idy/ai-server-shell)](https://goreportcard.com/report/github.com/idy/ai-server-shell)
 [![License](https://img.shields.io/github/license/idy/ai-server-shell)](LICENSE)
 
 AI Server Shell is a Go framework for exposing application-defined AI behavior
