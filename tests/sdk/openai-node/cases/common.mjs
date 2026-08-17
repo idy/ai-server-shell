@@ -125,6 +125,9 @@ function discoverHelpers(client) {
 async function invokeHelper(client, helper, request) {
   const resource = helper.owner.slice('client.'.length).split('.').reduce((value, key) => value[key], client);
   const combined = { ...request.query, ...request.body };
+  for (const key of request.selectorKeys) {
+    if (helper.source.includes(`?${key}=`) || helper.source.includes(`&${key}=`)) delete combined[key];
+  }
   for (const [key, value] of Object.entries(request.pathParameters)) {
     if (helper.source.includes(`\${${key}}`)) combined[key] = value;
   }
@@ -209,7 +212,13 @@ async function requestFixture(spec, manifest, { pathItem, operation }) {
     if (parameter.in === 'query' && parameter.required) query[parameter.name] = value;
   }
   const [, selector] = manifest.Path.split('?');
-  if (selector) for (const [key, value] of new URLSearchParams(selector)) query[key] = value;
+  const selectorKeys = [];
+  if (selector) {
+    for (const [key, value] of new URLSearchParams(selector)) {
+      query[key] = value;
+      selectorKeys.push(key);
+    }
+  }
   const content = operation.requestBody ? dereference(spec, operation.requestBody).content ?? {} : {};
   const mediaType = preferredRequestMedia(Object.keys(content), manifest.OperationID);
   let body;
@@ -219,7 +228,7 @@ async function requestFixture(spec, manifest, { pathItem, operation }) {
     if (mediaType === 'multipart/form-data') body = await hydrateFiles(body);
     if (mediaType.includes('json')) body = hydrateBinaryStrings(body);
   }
-  return { pathParameters, query, body, mediaType };
+  return { pathParameters, query, selectorKeys, body, mediaType };
 }
 
 function responseFixture(spec, { operation }, helper) {
@@ -391,8 +400,6 @@ function actualRequestMedia(operation, generatedMedia) {
 function canonicalJSONBody(operation, body) {
   let result = body;
   if (operation.OperationID === 'createEmbedding') result = { ...result, encoding_format: result.encoding_format ?? 'base64' };
-  const [, selector] = operation.Path.split('?');
-  if (selector && result && typeof result === 'object') result = { ...Object.fromEntries(new URLSearchParams(selector)), ...result };
   return result;
 }
 function preferredRequestMedia(mediaTypes, operation) {
