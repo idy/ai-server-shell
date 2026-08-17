@@ -11,6 +11,16 @@ plus the Realtime and Responses WebSocket unions in official Node SDK `v7.4.0`.
 Anthropic and Gemini handlers are future work and will consume the same
 protocol-neutral `backend.Services` registry.
 
+## Tested SDKs
+
+The compatibility suite pins and tests exact client versions. Add one row for
+each SDK version and language as coverage expands; an unlisted version is not an
+automatic compatibility claim.
+
+| Protocol | Language | SDK | Tested version |
+| --- | --- | --- | --- |
+| OpenAI | JavaScript / TypeScript | [`openai-node`](https://github.com/openai/openai-node) | `7.4.0` |
+
 ## Use it
 
 Implement the public backend contract, inject one object for every capability

@@ -32,6 +32,14 @@ func (s *fakeSession) Handle(_ context.Context, clientEvent backend.Event) error
 	if s.closed {
 		return context.Canceled
 	}
+	var fixture struct {
+		ServerType    string          `json:"fixture_server_type"`
+		ServerPayload json.RawMessage `json:"fixture_server_payload"`
+	}
+	if json.Unmarshal(clientEvent.Data, &fixture) == nil && fixture.ServerType != "" && len(fixture.ServerPayload) > 0 {
+		s.events <- event(fixture.ServerType, string(fixture.ServerPayload))
+		return nil
+	}
 	if s.surface == backend.SessionRealtime {
 		switch clientEvent.Type {
 		case "session.update":

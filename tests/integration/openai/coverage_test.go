@@ -30,16 +30,25 @@ func TestCompatibilityMatrixCoversFrozenProfile(t *testing.T) {
 	}
 	var matrix struct {
 		HTTP []struct {
-			Operation string `yaml:"operation"`
-			Support   string `yaml:"support"`
-			LocalCase string `yaml:"local_case"`
+			Operation     string   `yaml:"operation"`
+			Route         string   `yaml:"route"`
+			LocalSemantic string   `yaml:"local_semantic"`
+			LocalCase     string   `yaml:"local_case"`
+			SDKCall       string   `yaml:"sdk_call"`
+			Transports    []string `yaml:"transports"`
+			SchemaCases   []string `yaml:"schema_cases"`
+			LiveProfile   string   `yaml:"live_profile"`
 		} `yaml:"http"`
 		Events []struct {
-			Surface   string `yaml:"surface"`
-			Direction string `yaml:"direction"`
-			Type      string `yaml:"type"`
-			Support   string `yaml:"support"`
-			LocalCase string `yaml:"local_case"`
+			Surface       string   `yaml:"surface"`
+			Direction     string   `yaml:"direction"`
+			Type          string   `yaml:"type"`
+			Route         string   `yaml:"route"`
+			LocalSemantic string   `yaml:"local_semantic"`
+			LocalCase     string   `yaml:"local_case"`
+			Transports    []string `yaml:"transports"`
+			SchemaCases   []string `yaml:"schema_cases"`
+			LiveProfile   string   `yaml:"live_profile"`
 		} `yaml:"events"`
 	}
 	if err := yaml.Unmarshal(data, &matrix); err != nil {
@@ -48,11 +57,20 @@ func TestCompatibilityMatrixCoversFrozenProfile(t *testing.T) {
 	if len(manifest) != 288 || len(matrix.HTTP) != len(manifest) {
 		t.Fatalf("HTTP manifest=%d matrix=%d", len(manifest), len(matrix.HTTP))
 	}
+	rawCases := 0
 	for index, operation := range manifest {
 		entry := matrix.HTTP[index]
-		if entry.Operation != operation.OperationID || entry.Support != "implemented" || entry.LocalCase == "" {
+		if entry.Operation != operation.OperationID || entry.Route != "covered" || entry.LocalSemantic != "validated_official_sdk" || entry.LocalCase == "" || len(entry.Transports) == 0 || len(entry.SchemaCases) == 0 || entry.LiveProfile == "" {
 			t.Fatalf("HTTP entry %d = %#v for %#v", index, entry, operation)
 		}
+		if entry.SDKCall == "raw_sdk_exception" {
+			rawCases++
+		} else if entry.SDKCall != "resource_helper" {
+			t.Fatalf("HTTP entry %d has invalid SDK call ownership %q", index, entry.SDKCall)
+		}
+	}
+	if rawCases != 8 {
+		t.Fatalf("raw SDK exceptions = %d, want 8", rawCases)
 	}
 	wantEvents := map[string]bool{}
 	for surface, inventory := range events.Surfaces {
@@ -68,7 +86,7 @@ func TestCompatibilityMatrixCoversFrozenProfile(t *testing.T) {
 	}
 	for _, entry := range matrix.Events {
 		key := entry.Surface + "/" + entry.Direction + "/" + entry.Type
-		if !wantEvents[key] || entry.Support != "implemented" || entry.LocalCase == "" {
+		if !wantEvents[key] || entry.Route != "covered" || entry.LocalSemantic == "" || entry.LocalCase == "" || len(entry.Transports) != 1 || len(entry.SchemaCases) == 0 || entry.LiveProfile != "unavailable" {
 			t.Fatalf("invalid event matrix entry %#v", entry)
 		}
 		delete(wantEvents, key)

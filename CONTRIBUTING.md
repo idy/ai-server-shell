@@ -30,8 +30,13 @@ manifest, event inventory, compatibility documentation, and official-SDK tests
 in the same pull request. `go generate ./...` must then leave no diff.
 
 Live compatibility is a separate opt-in gate. Use the safe profile for
-read-only checks. Never run the full profile without a disposable project,
-explicit mutation/cost approval, and verified cleanup.
+read-only checks. Paid and mutation profiles require their explicit gates;
+mutation cases also require a disposable project and verified cleanup.
+
+Every affected OpenAI operation or event must have a stable named semantic case
+and regenerated matrix entry. Record route, SDK call ownership, transports,
+schema cases, local evidence, and live classification separately; a route or
+discriminator inventory check is not a semantic compatibility result.
 
 ## Pull requests
 

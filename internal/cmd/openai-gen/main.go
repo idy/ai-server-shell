@@ -44,6 +44,12 @@ type generatedOperation struct {
 	RequestMedia  []string
 	ResponseMedia []string
 	SuccessStatus int
+	SDKCall       string
+	LocalCase     string
+	Transports    []string
+	SchemaCases   []string
+	LiveProfile   string
+	LiveReason    string
 }
 
 type eventInventory struct {
@@ -99,6 +105,9 @@ func main() {
 			fatalf("event inventory contains %d direction-specific entries, want 121", count)
 		}
 	}
+	if err := validateEvidence(operations, events); err != nil {
+		fatalf("validate evidence: %v", err)
+	}
 	generated, err := render(raw, len(spec.Paths), operations, events)
 	if err != nil {
 		fatalf("render: %v", err)
@@ -136,6 +145,46 @@ func main() {
 	}
 }
 
+func validateEvidence(operations []generatedOperation, inventory eventInventory) error {
+	operationIDs := make(map[string]bool, len(operations))
+	caseNames := make(map[string]bool, len(operations))
+	rawSeen := make(map[string]bool, len(rawOnlyOperations))
+	validProfiles := map[string]bool{"safe": true, "paid": true, "mutation": true, "unavailable": true}
+	for _, operation := range operations {
+		if operationIDs[operation.OperationID] {
+			return fmt.Errorf("duplicate operation ID %q", operation.OperationID)
+		}
+		operationIDs[operation.OperationID] = true
+		if operation.LocalCase == "" || caseNames[operation.LocalCase] {
+			return fmt.Errorf("missing or duplicate local case %q", operation.LocalCase)
+		}
+		caseNames[operation.LocalCase] = true
+		if operation.SDKCall != "resource_helper" && operation.SDKCall != "raw_sdk_exception" {
+			return fmt.Errorf("operation %q has invalid SDK call %q", operation.OperationID, operation.SDKCall)
+		}
+		if operation.SDKCall == "raw_sdk_exception" {
+			rawSeen[operation.OperationID] = true
+		}
+		if len(operation.Transports) == 0 || len(operation.SchemaCases) == 0 || !validProfiles[operation.LiveProfile] {
+			return fmt.Errorf("operation %q has incomplete evidence metadata", operation.OperationID)
+		}
+	}
+	for operationID := range rawOnlyOperations {
+		if !rawSeen[operationID] {
+			return fmt.Errorf("raw SDK exception %q is absent from the profile", operationID)
+		}
+	}
+	eventKeys := make(map[string]bool)
+	for _, event := range collectEvents(inventory) {
+		key := event.Surface + "/" + event.Direction + "/" + event.Type
+		if eventKeys[key] {
+			return fmt.Errorf("duplicate event evidence %q", key)
+		}
+		eventKeys[key] = true
+	}
+	return nil
+}
+
 func collectOperations(spec document) []generatedOperation {
 	methods := map[string]bool{"get": true, "post": true, "put": true, "patch": true, "delete": true}
 	var result []generatedOperation
@@ -166,6 +215,14 @@ func collectOperations(spec document) []generatedOperation {
 			}
 			sort.Strings(item.RequestMedia)
 			sort.Strings(item.ResponseMedia)
+			item.SDKCall = "resource_helper"
+			if rawOnlyOperations[item.OperationID] {
+				item.SDKCall = "raw_sdk_exception"
+			}
+			item.LocalCase = "http." + item.Capability + "." + item.OperationID
+			item.Transports = operationTransports(item)
+			item.SchemaCases = []string{"minimal_valid_request", "valid_success_response"}
+			item.LiveProfile, item.LiveReason = liveClassification(item)
 			result = append(result, item)
 		}
 	}
@@ -176,6 +233,54 @@ func collectOperations(spec document) []generatedOperation {
 		return result[i].Path < result[j].Path
 	})
 	return result
+}
+
+var rawOnlyOperations = map[string]bool{
+	"listVoiceConsents": true, "createVoiceConsent": true, "deleteVoiceConsent": true,
+	"getVoiceConsent": true, "updateVoiceConsent": true, "createVoice": true,
+	"create-realtime-call": true, "create-realtime-translation-client-secret": true,
+}
+
+func operationTransports(operation generatedOperation) []string {
+	seen := map[string]bool{}
+	add := func(value string) {
+		if !seen[value] {
+			operation.Transports = append(operation.Transports, value)
+			seen[value] = true
+		}
+	}
+	if strings.Contains(operation.Path, "{") {
+		add("path")
+	}
+	if strings.Contains(operation.Path, "?") {
+		add("query")
+	}
+	for _, media := range append(append([]string(nil), operation.RequestMedia...), operation.ResponseMedia...) {
+		switch {
+		case media == "multipart/form-data":
+			add("multipart")
+		case media == "text/event-stream":
+			add("sse")
+		case strings.Contains(media, "json"):
+			add("json")
+		default:
+			add("binary")
+		}
+	}
+	return operation.Transports
+}
+
+func liveClassification(operation generatedOperation) (string, string) {
+	switch operation.OperationID {
+	case "listModels":
+		return "safe", "scheduled read-only differential"
+	case "createEmbedding":
+		return "paid", "manual cost approval required; no live result recorded"
+	case "createFile", "deleteFile":
+		return "mutation", "manual disposable-account approval and verified cleanup required; no live result recorded"
+	default:
+		return "unavailable", "no named bounded live differential is configured"
+	}
 }
 
 func successStatus(responses map[string]response) int {
@@ -336,8 +441,14 @@ func renderCompatibility(operations []generatedOperation, events eventInventory)
 		fmt.Fprintln(&out, "    method:", strconv.Quote(operation.Method))
 		fmt.Fprintln(&out, "    path:", strconv.Quote(operation.Path))
 		fmt.Fprintln(&out, "    capability:", strconv.Quote(operation.Capability))
-		fmt.Fprintln(&out, "    local_case: official-sdk-route")
-		fmt.Fprintln(&out, "    support: implemented")
+		fmt.Fprintln(&out, "    route: covered")
+		fmt.Fprintln(&out, "    local_semantic: validated_official_sdk")
+		fmt.Fprintln(&out, "    local_case:", strconv.Quote(operation.LocalCase))
+		fmt.Fprintln(&out, "    sdk_call:", operation.SDKCall)
+		fmt.Fprintln(&out, "    transports:", yamlList(operation.Transports))
+		fmt.Fprintln(&out, "    schema_cases:", yamlList(operation.SchemaCases))
+		fmt.Fprintln(&out, "    live_profile:", operation.LiveProfile)
+		fmt.Fprintln(&out, "    live_reason:", strconv.Quote(operation.LiveReason))
 	}
 	fmt.Fprintln(&out, "events:")
 	for _, event := range collectEvents(events) {
@@ -345,10 +456,23 @@ func renderCompatibility(operations []generatedOperation, events eventInventory)
 		fmt.Fprintln(&out, "    direction:", strconv.Quote(event.Direction))
 		fmt.Fprintln(&out, "    type:", strconv.Quote(event.Type))
 		fmt.Fprintln(&out, "    capability: realtime")
-		fmt.Fprintln(&out, "    local_case: event-roundtrip")
-		fmt.Fprintln(&out, "    support: implemented")
+		fmt.Fprintln(&out, "    route: covered")
+		fmt.Fprintln(&out, "    local_semantic: official_sdk_"+map[string]string{"client": "send", "server": "listener"}[event.Direction])
+		fmt.Fprintln(&out, "    local_case:", strconv.Quote("websocket."+event.Surface+"."+event.Direction+"."+event.Type))
+		fmt.Fprintln(&out, "    transports: [websocket]")
+		fmt.Fprintln(&out, "    schema_cases: [representative_payload, unknown_field_preserved]")
+		fmt.Fprintln(&out, "    live_profile: unavailable")
+		fmt.Fprintln(&out, "    live_reason: \"no bounded live WebSocket differential is configured\"")
 	}
 	return out.Bytes()
+}
+
+func yamlList(values []string) string {
+	quoted := make([]string, len(values))
+	for index, value := range values {
+		quoted[index] = strconv.Quote(value)
+	}
+	return "[" + strings.Join(quoted, ", ") + "]"
 }
 
 func fatalf(format string, args ...any) {

@@ -3,10 +3,7 @@
 package openai_integration_test
 
 import (
-	"bytes"
-	"context"
 	"encoding/json"
-	"io"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -27,6 +24,7 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 	repoRoot := repositoryRoot(t)
 	runner := filepath.Join(repoRoot, "tests", "sdk", "openai-node", "runner.mjs")
 	manifest := filepath.Join(repoRoot, "tests", "sdk", "openai-node", "operations.json")
+	spec := filepath.Join(repoRoot, "spec", "openai", "openapi.json")
 	if _, err := os.Stat(filepath.Join(repoRoot, "tests", "sdk", "openai-node", "node_modules", "openai")); err != nil {
 		t.Fatal("run npm --prefix tests/sdk/openai-node ci before the integration suite")
 	}
@@ -36,7 +34,7 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	handler, err := openaihandler.NewHandler(services, openaihandler.WithoutSchemaValidation())
+	handler, err := openaihandler.NewHandler(services)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -48,24 +46,51 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 		"AI_SHELL_BASE_URL="+server.URL+"/v1",
 		"AI_SHELL_API_KEY=integration-test-key",
 		"AI_SHELL_OPERATION_MANIFEST="+manifest,
+		"AI_SHELL_OPENAPI_SPEC="+spec,
 	)
 	output, err := command.CombinedOutput()
 	if err != nil {
 		t.Fatalf("official SDK runner failed: %v\n%s", err, output)
 	}
 	var result struct {
-		Expected int   `json:"expected"`
-		Passed   int   `json:"passed"`
-		Failures []any `json:"failures"`
+		Expected      int      `json:"expected"`
+		Passed        int      `json:"passed"`
+		HelperCases   int      `json:"helper_cases"`
+		RawCases      int      `json:"raw_cases"`
+		Failures      []any    `json:"failures"`
+		NegativeCases []string `json:"negative_cases"`
+		StreamCases   []string `json:"stream_cases"`
 	}
 	if err := json.Unmarshal(output, &result); err != nil {
 		t.Fatalf("decode SDK result: %v\n%s", err, output)
 	}
-	if result.Expected != 289 || result.Passed != result.Expected || len(result.Failures) != 0 {
-		t.Fatalf("unexpected SDK result: %s", output)
+	if result.Expected != 288 || result.Passed != result.Expected || result.HelperCases != 280 || result.RawCases != 8 || len(result.Failures) != 0 || len(result.NegativeCases) != 1 || len(result.StreamCases) != 1 {
+		t.Fatalf("official SDK semantic cases: expected=%d passed=%d failures=%v", result.Expected, result.Passed, result.Failures)
 	}
 	if got := len(fake.Requests()); got != 289 {
 		t.Fatalf("backend request count = %d, want 289", got)
+	}
+	seen := make(map[string]int, 288)
+	media := make(map[string]bool)
+	parameterized := 0
+	for _, request := range fake.Requests() {
+		seen[request.Operation]++
+		media[request.Input.MediaType] = true
+		if len(request.Parameters) > 0 {
+			parameterized++
+		}
+		if request.Metadata.Protocol != "openai" || request.Metadata.CallerID != "anonymous" || request.Metadata.RequestID == "" {
+			t.Fatalf("incomplete canonical metadata for %s: %#v", request.Operation, request.Metadata)
+		}
+		if request.Metadata.Extensions["Authorization"] != nil || request.Metadata.Extensions["Cookie"] != nil {
+			t.Fatalf("unsafe credentials reached backend metadata for %s", request.Operation)
+		}
+		if len(request.Input.Bytes) > 0 && request.Input.MediaType == "" {
+			t.Fatalf("request body for %s has no canonical media type", request.Operation)
+		}
+	}
+	if len(seen) != 288 || parameterized == 0 || !media["application/json"] || !media["multipart/form-data"] || !media["application/sdp"] {
+		t.Fatalf("canonical coverage operations=%d parameterized=%d media=%v", len(seen), parameterized, media)
 	}
 }
 
@@ -96,6 +121,7 @@ func TestOfficialNodeSDKWebSockets(t *testing.T) {
 	command.Env = append(os.Environ(),
 		"AI_SHELL_BASE_URL="+server.URL+"/v1",
 		"AI_SHELL_API_KEY=integration-test-key",
+		"AI_SHELL_EVENT_INVENTORY="+filepath.Join(repoRoot, "spec", "openai", "realtime-events.json"),
 		"NODE_TLS_REJECT_UNAUTHORIZED=0",
 		"NODE_NO_WARNINGS=1",
 	)
@@ -103,72 +129,17 @@ func TestOfficialNodeSDKWebSockets(t *testing.T) {
 	if err != nil {
 		t.Fatalf("official SDK WebSocket runner failed: %v\n%s", err, output)
 	}
-	var result map[string]string
+	var result struct {
+		Expected int      `json:"expected"`
+		Passed   int      `json:"passed"`
+		Covered  []string `json:"covered"`
+	}
 	if err := json.Unmarshal(output, &result); err != nil {
 		t.Fatalf("decode SDK WebSocket result: %v\n%s", err, output)
 	}
-	if result["realtime"] != "session.updated" || result["responses"] != "response.completed" {
+	if result.Expected != 121 || result.Passed != 121 || len(result.Covered) != 121 {
 		t.Fatalf("unexpected SDK WebSocket result: %s", output)
 	}
-}
-
-func TestOfficialNodeSDKValidationBoundary(t *testing.T) {
-	repoRoot := repositoryRoot(t)
-	if _, err := os.Stat(filepath.Join(repoRoot, "tests", "sdk", "openai-node", "node_modules", "openai")); err != nil {
-		t.Fatal("run npm --prefix tests/sdk/openai-node ci before the integration suite")
-	}
-	validated := &validationBackend{}
-	services, err := backend.NewServices(backend.WithHandler(validated))
-	if err != nil {
-		t.Fatal(err)
-	}
-	handler, err := openaihandler.NewHandler(services)
-	if err != nil {
-		t.Fatal(err)
-	}
-	server := httptest.NewServer(handler)
-	defer server.Close()
-	command := exec.Command("node", filepath.Join(repoRoot, "tests", "sdk", "openai-node", "validated.mjs"))
-	command.Env = append(os.Environ(), "AI_SHELL_BASE_URL="+server.URL+"/v1", "AI_SHELL_API_KEY=integration-test-key")
-	output, err := command.CombinedOutput()
-	if err != nil {
-		t.Fatalf("validation-enabled SDK runner failed: %v\n%s", err, output)
-	}
-	var result struct {
-		Passed          int  `json:"passed"`
-		InvalidRejected bool `json:"invalidRejected"`
-	}
-	if err := json.Unmarshal(output, &result); err != nil || result.Passed != 4 || !result.InvalidRejected {
-		t.Fatalf("validation result=%s err=%v", output, err)
-	}
-	requests := validated.Requests()
-	if len(requests) != 4 || requests[1].Input.MediaType != "application/json" || requests[2].Input.MediaType != "multipart/form-data" {
-		t.Fatalf("validated backend requests = %#v", requests)
-	}
-}
-
-type validationBackend struct {
-	requests []backend.Request
-}
-
-func (b *validationBackend) Handle(_ context.Context, request backend.Request) (backend.Response, error) {
-	b.requests = append(b.requests, request)
-	switch request.Operation {
-	case "listModels":
-		return backend.Response{JSON: json.RawMessage(`{"object":"list","data":[],"first_id":null,"last_id":null,"has_more":false}`)}, nil
-	case "createEmbedding":
-		return backend.Response{JSON: json.RawMessage(`{"object":"list","model":"text-embedding-test","data":[{"object":"embedding","index":0,"embedding":[0.1]}],"usage":{"prompt_tokens":1,"total_tokens":1}}`)}, nil
-	case "createFile":
-		return backend.Response{JSON: json.RawMessage(`{"id":"file_test","object":"file","bytes":14,"created_at":1,"filename":"input.jsonl","purpose":"batch","status":"processed"}`)}, nil
-	case "downloadFile":
-		return backend.Response{MediaType: "application/octet-stream", Body: io.NopCloser(bytes.NewBufferString("binary-test"))}, nil
-	default:
-		return backend.Response{}, &backend.Error{Kind: backend.ErrorUnsupported, Message: "unexpected validation test operation"}
-	}
-}
-
-func (b *validationBackend) Requests() []backend.Request {
-	return append([]backend.Request(nil), b.requests...)
 }
 
 func repositoryRoot(t *testing.T) string {

@@ -81,3 +81,27 @@ func TestSpecJSONReturnsIndependentCopies(t *testing.T) {
 		t.Fatal("SpecJSON returned shared storage")
 	}
 }
+
+func TestRouterSpecPromotesCommonAnyOfType(t *testing.T) {
+	value := map[string]any{
+		"anyOf": []any{
+			map[string]any{"type": "string"},
+			map[string]any{"type": "string", "enum": []any{"whisper-1"}},
+		},
+	}
+	normalizeNullSchemas(value)
+	if value["type"] != "string" {
+		t.Fatalf("promoted type = %#v", value["type"])
+	}
+
+	mixed := map[string]any{
+		"anyOf": []any{
+			map[string]any{"type": "string"},
+			map[string]any{"type": "array"},
+		},
+	}
+	normalizeNullSchemas(mixed)
+	if _, exists := mixed["type"]; exists {
+		t.Fatalf("mixed union acquired type: %#v", mixed)
+	}
+}

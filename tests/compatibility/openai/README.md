@@ -14,6 +14,23 @@ npm --prefix tests/sdk/openai-node ci
 OPENAI_COMPAT_PROFILE=safe go test -tags=compatibility -v ./tests/compatibility/openai
 ```
 
-Never enable `full` without a disposable project and explicit cost/mutation
-approval. The current M1 implementation deliberately reports the remaining
-full-profile surface as unverified rather than silently spending or mutating.
+The bounded paid profile creates no persistent resource:
+
+```sh
+OPENAI_COMPAT_PROFILE=paid OPENAI_COMPAT_ALLOW_COST=1 \
+  go test -tags=compatibility -v ./tests/compatibility/openai
+```
+
+The mutation profile uploads one batch-purpose JSONL file and verifies its
+deletion. Use only a disposable project:
+
+```sh
+OPENAI_COMPAT_PROFILE=mutation OPENAI_COMPAT_ALLOW_COST=1 \
+  OPENAI_COMPAT_ALLOW_MUTATION=1 \
+  go test -tags=compatibility -v ./tests/compatibility/openai
+```
+
+Missing credentials, transport/adapter failures, assertion failures, and failed
+cleanup are `FAIL`. `SKIP` is reserved for an explicitly verified upstream
+permission, model, account, or regional restriction and must retain its
+sanitized reason; current named cases do not synthesize `SKIP` outcomes.
