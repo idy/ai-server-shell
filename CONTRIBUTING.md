@@ -15,6 +15,13 @@ Requirements:
 
 - Go 1.24 or later
 - Node.js 22 or later for official SDK compatibility tests
+- `modernize` from `golang.org/x/tools` v0.42.0
+
+Install the pinned analyzer:
+
+```sh
+go install golang.org/x/tools/go/analysis/passes/modernize/cmd/modernize@v0.42.0
+```
 
 Run the Go checks:
 
@@ -22,6 +29,7 @@ Run the Go checks:
 go test ./...
 go test -race ./...
 go vet ./...
+modernize ./...
 ```
 
 Run the complete credential-free gate with `make verify`. Changes to the frozen
@@ -30,8 +38,13 @@ manifest, event inventory, compatibility documentation, and official-SDK tests
 in the same pull request. `go generate ./...` must then leave no diff.
 
 Live compatibility is a separate opt-in gate. Use the safe profile for
-read-only checks. Never run the full profile without a disposable project,
-explicit mutation/cost approval, and verified cleanup.
+read-only checks. Paid and mutation profiles require their explicit gates;
+mutation cases also require a disposable project and verified cleanup.
+
+Every affected OpenAI operation or event must have a stable named semantic case
+and regenerated matrix entry. Record route, SDK call ownership, transports,
+schema cases, local evidence, and live classification separately; a route or
+discriminator inventory check is not a semantic compatibility result.
 
 ## Pull requests
 

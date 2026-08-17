@@ -51,7 +51,6 @@ func TestHandlerRoutesEveryFrozenOperation(t *testing.T) {
 		t.Fatal(err)
 	}
 	for _, operation := range profile.Operations {
-		operation := operation
 		t.Run(operation.ID, func(t *testing.T) {
 			received = ""
 			target := "/v1" + pathParameter.ReplaceAllString(operation.Path, "test-id")

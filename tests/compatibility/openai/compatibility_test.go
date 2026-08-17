@@ -7,7 +7,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"reflect"
 	"runtime"
 	"testing"
 
@@ -17,15 +16,16 @@ import (
 	openaihandler "github.com/idy/ai-server-shell/openai"
 )
 
-func TestSafeLiveDifferential(t *testing.T) {
-	if profile := os.Getenv("OPENAI_COMPAT_PROFILE"); profile != "safe" && profile != "full" {
-		t.Skip("set OPENAI_COMPAT_PROFILE=safe or full")
+func TestLiveDifferential(t *testing.T) {
+	profile := os.Getenv("OPENAI_COMPAT_PROFILE")
+	if profile != "safe" && profile != "paid" && profile != "mutation" {
+		t.Skip("set OPENAI_COMPAT_PROFILE=safe, paid, or mutation")
 	}
-	if os.Getenv("OPENAI_COMPAT_PROFILE") == "full" {
-		if os.Getenv("OPENAI_COMPAT_ALLOW_MUTATION") != "1" {
-			t.Fatal("full profile requires OPENAI_COMPAT_ALLOW_MUTATION=1")
-		}
-		t.Fatal("full profile operation cases are not implemented; refusing to report a false compatibility pass")
+	if profile != "safe" && os.Getenv("OPENAI_COMPAT_ALLOW_COST") != "1" {
+		t.Fatal(profile + " profile requires OPENAI_COMPAT_ALLOW_COST=1")
+	}
+	if profile == "mutation" && os.Getenv("OPENAI_COMPAT_ALLOW_MUTATION") != "1" {
+		t.Fatal("mutation profile requires OPENAI_COMPAT_ALLOW_MUTATION=1")
 	}
 	upstreamKey := os.Getenv("OPENAI_API_KEY")
 	if upstreamKey == "" {
@@ -37,8 +37,12 @@ func TestSafeLiveDifferential(t *testing.T) {
 		t.Fatal("run npm --prefix tests/sdk/openai-node ci first")
 	}
 
-	direct := runSDK(t, runner, "https://api.openai.com/v1", upstreamKey)
-	services, err := backend.NewServices(backend.WithModels(newUpstreamBackend("https://api.openai.com/v1", upstreamKey)))
+	direct := runSDK(t, runner, "https://api.openai.com/v1", upstreamKey, "direct")
+	if err := validateEvidence(profile, direct); err != nil {
+		t.Fatal(err)
+	}
+	upstream := newUpstreamBackend("https://api.openai.com/v1", upstreamKey)
+	services, err := backend.NewServices(backend.WithHandler(upstream))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -48,26 +52,38 @@ func TestSafeLiveDifferential(t *testing.T) {
 	}
 	server := httptest.NewServer(handler)
 	defer server.Close()
-	shell := runSDK(t, runner, server.URL+"/v1", "shell-test-credential")
-	if !reflect.DeepEqual(direct, shell) {
-		t.Fatalf("normalized observations differ\ndirect=%s\nshell=%s", direct, shell)
+	shell := runSDK(t, runner, server.URL+"/v1", "shell-test-credential", "shell")
+	if err := validateEvidence(profile, shell); err != nil {
+		t.Fatal(err)
 	}
-	t.Logf("PASS profile=%s operation=listModels target=local cleanup=not-required models=%d", os.Getenv("OPENAI_COMPAT_PROFILE"), len(direct.Data))
+	if !observationsEqual(direct, shell) {
+		t.Fatalf("normalized observations differ\ndirect=%#v\nshell=%#v", direct, shell)
+	}
+	for _, result := range shell.Cases {
+		t.Logf("%s profile=%s case=%s target=differential cleanup=%s", result.Outcome, profile, result.Name, result.Cleanup.Outcome)
+	}
 }
 
 type observation struct {
-	Operation string `json:"operation"`
-	Object    string `json:"object"`
-	Data      []struct {
-		ID     string `json:"id"`
-		Object string `json:"object"`
-	} `json:"data"`
+	Profile string            `json:"profile"`
+	Target  string            `json:"target"`
+	Cases   []caseObservation `json:"cases"`
 }
 
-func runSDK(t *testing.T, runner, baseURL, apiKey string) observation {
+type caseObservation struct {
+	Name        string         `json:"name"`
+	Outcome     string         `json:"outcome"`
+	Observation map[string]any `json:"observation"`
+	Cleanup     struct {
+		Required bool   `json:"required"`
+		Outcome  string `json:"outcome"`
+	} `json:"cleanup"`
+}
+
+func runSDK(t *testing.T, runner, baseURL, apiKey, target string) observation {
 	t.Helper()
 	command := exec.Command("node", runner)
-	command.Env = append(os.Environ(), "AI_SHELL_BASE_URL="+baseURL, "AI_SHELL_API_KEY="+apiKey)
+	command.Env = append(os.Environ(), "AI_SHELL_BASE_URL="+baseURL, "AI_SHELL_API_KEY="+apiKey, "OPENAI_COMPAT_TARGET="+target)
 	output, err := command.CombinedOutput()
 	if err != nil {
 		t.Fatalf("official SDK live runner failed: %v\n%s", err, output)

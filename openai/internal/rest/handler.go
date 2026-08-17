@@ -80,6 +80,10 @@ func (h *handler) ServeHTTP(writer http.ResponseWriter, request *http.Request) {
 			AuthenticationFunc:                openapi3filter.NoopAuthenticationFunc,
 			MultiError:                        true,
 			RejectWhenRequestBodyNotSpecified: validationRoute.Operation.RequestBody == nil,
+			// The backend receives the original wire payload, so applying schema
+			// defaults to a decoded copy has no effect. It also makes kin-openapi
+			// attempt to re-encode multipart bodies, which it does not support.
+			SkipSettingDefaults: true,
 		},
 	}
 	if h.config.Validate {

@@ -8,7 +8,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.listAssistants",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -21,7 +33,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.createAssistant",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -32,7 +55,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.deleteAssistant",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -43,7 +78,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.getAssistant",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -56,7 +103,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.modifyAssistant",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -70,7 +129,20 @@
       "application/octet-stream",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.audio.createSpeech",
+    "Transports": [
+      "json",
+      "binary",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -84,7 +156,20 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.audio.createTranscription",
+    "Transports": [
+      "multipart",
+      "json",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -97,7 +182,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.audio.createTranslation",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -108,7 +205,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.listVoiceConsents",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -121,7 +230,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.createVoiceConsent",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -132,7 +253,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.deleteVoiceConsent",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -143,7 +276,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.getVoiceConsent",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -156,7 +301,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.updateVoiceConsent",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -169,7 +326,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.audio.createVoice",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -180,7 +349,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.batches.listBatches",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -193,7 +374,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.batches.createBatch",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -204,7 +396,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.batches.retrieveBatch",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -215,7 +419,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.batches.cancelBatch",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -226,7 +442,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.listChatCompletions",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -240,7 +468,19 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.createChatCompletion",
+    "Transports": [
+      "json",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -251,7 +491,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.deleteChatCompletion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -262,7 +514,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.getChatCompletion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -275,7 +539,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.updateChatCompletion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -286,7 +562,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chat.getChatCompletionMessages",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -299,7 +588,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.CreateChatSessionMethod",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -310,7 +610,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.CancelChatSessionMethod",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -321,7 +633,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.ListThreadsMethod",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -332,7 +656,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.DeleteThreadMethod",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -343,7 +679,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.GetThreadMethod",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -354,7 +702,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.chatkit.ListThreadItemsMethod",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -367,7 +728,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.completions.createCompletion",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -378,7 +750,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.ListContainers",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -391,7 +775,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.CreateContainer",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -400,7 +795,18 @@
     "Capability": "containers",
     "RequestMedia": null,
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.DeleteContainer",
+    "Transports": [
+      "path"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -411,7 +817,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.RetrieveContainer",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -422,7 +840,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.ListContainerFiles",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -436,7 +867,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.CreateContainerFile",
+    "Transports": [
+      "path",
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -445,7 +889,18 @@
     "Capability": "containers",
     "RequestMedia": null,
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.DeleteContainerFile",
+    "Transports": [
+      "path"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -456,7 +911,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.RetrieveContainerFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -465,7 +932,18 @@
     "Capability": "containers",
     "RequestMedia": null,
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.containers.RetrieveContainerFileContent",
+    "Transports": [
+      "path"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -478,7 +956,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.moderations.Createcontentprovenancecheck",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -491,7 +981,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.createConversation",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -502,7 +1003,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.deleteConversation",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -513,7 +1026,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.getConversation",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -526,7 +1051,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.updateConversation",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -537,7 +1074,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.listConversationItems",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -550,7 +1100,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.createConversationItems",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -561,7 +1124,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.deleteConversationItem",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -572,7 +1147,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.conversations.getConversationItem",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -585,7 +1173,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.embeddings.createEmbedding",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "paid",
+    "LiveReason": "manual cost approval required; no live result recorded"
   },
   {
     "Method": "GET",
@@ -596,7 +1195,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.listEvals",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -609,7 +1220,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 201
+    "SuccessStatus": 201,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.createEval",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -620,7 +1242,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.deleteEval",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -631,7 +1265,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.getEval",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -644,7 +1290,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.updateEval",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -655,7 +1313,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.getEvalRuns",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -668,7 +1339,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 201
+    "SuccessStatus": 201,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.createEvalRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -679,7 +1362,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.deleteEvalRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -690,7 +1385,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.getEvalRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -701,7 +1408,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.cancelEvalRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -712,7 +1431,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.getEvalRunOutputItems",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -723,7 +1455,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.evals.getEvalRunOutputItem",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -734,7 +1478,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.files.listFiles",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -747,7 +1503,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.files.createFile",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "mutation",
+    "LiveReason": "manual disposable-account approval and verified cleanup required; no live result recorded"
   },
   {
     "Method": "DELETE",
@@ -758,7 +1526,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.files.deleteFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "mutation",
+    "LiveReason": "manual disposable-account approval and verified cleanup required; no live result recorded"
   },
   {
     "Method": "GET",
@@ -769,7 +1549,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.files.retrieveFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -780,7 +1572,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.files.downloadFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -793,7 +1597,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.runGrader",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -806,7 +1621,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.validateGrader",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -817,7 +1643,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.listFineTuningCheckpointPermissions",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -830,7 +1669,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.createFineTuningCheckpointPermission",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -841,7 +1692,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.deleteFineTuningCheckpointPermission",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -852,7 +1715,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.listPaginatedFineTuningJobs",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -865,7 +1740,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.createFineTuningJob",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -876,7 +1762,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.retrieveFineTuningJob",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -887,7 +1785,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.cancelFineTuningJob",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -898,7 +1808,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.listFineTuningJobCheckpoints",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -909,7 +1832,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.listFineTuningEvents",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -920,7 +1856,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.pauseFineTuningJob",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -931,7 +1879,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.fine_tuning.resumeFineTuningJob",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -946,7 +1906,20 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.images.createImageEdit",
+    "Transports": [
+      "json",
+      "multipart",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -960,7 +1933,19 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.images.createImage",
+    "Transports": [
+      "json",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -973,7 +1958,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.images.createImageVariation",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -984,7 +1981,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.models.listModels",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "safe",
+    "LiveReason": "scheduled read-only differential"
   },
   {
     "Method": "DELETE",
@@ -995,7 +2003,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.models.deleteModel",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1006,7 +2026,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.models.retrieveModel",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1019,7 +2051,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.moderations.createModeration",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1030,7 +2073,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.admin-api-keys-list",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1043,7 +2098,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.admin-api-keys-create",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1054,7 +2120,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.admin-api-keys-delete",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1065,7 +2143,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.admin-api-keys-get",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1076,7 +2166,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-audit-logs",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1087,7 +2189,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.listOrganizationCertificates",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1100,7 +2214,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.uploadCertificate",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1113,7 +2238,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.activateOrganizationCertificates",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1126,7 +2262,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.deactivateOrganizationCertificates",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1137,7 +2284,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.deleteCertificate",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1148,7 +2307,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.getCertificate",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1161,7 +2333,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.modifyCertificate",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1172,7 +2356,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-costs",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1183,7 +2379,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-organization-data-retention",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1196,7 +2403,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-organization-data-retention",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1207,7 +2425,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-groups",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1220,7 +2450,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-group",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1231,7 +2472,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-group",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1242,7 +2495,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-group",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1255,7 +2520,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-group",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1266,7 +2543,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-group-role-assignments",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1279,7 +2569,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.assign-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1290,7 +2592,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.unassign-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1301,7 +2615,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1312,7 +2638,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-group-users",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1325,7 +2664,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.add-group-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1336,7 +2687,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.remove-group-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1347,7 +2710,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-group-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1358,7 +2733,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-invites",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1371,7 +2758,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.inviteUser",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1382,7 +2780,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-invite",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1393,7 +2803,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-invite",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1404,7 +2826,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-projects",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1417,7 +2851,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-project",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1428,7 +2873,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1441,7 +2898,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.modify-project",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1452,7 +2921,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-api-keys",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1463,7 +2945,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-api-key",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1474,7 +2968,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-api-key",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1485,7 +2991,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.archive-project",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1496,7 +3014,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.listProjectCertificates",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1509,7 +3040,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.activateProjectCertificates",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1522,7 +3065,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.deactivateProjectCertificates",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1533,7 +3088,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-data-retention",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1546,7 +3113,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-data-retention",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1557,7 +3136,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-groups",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1570,7 +3162,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.add-project-group",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1581,7 +3185,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.remove-project-group",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1592,7 +3208,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-group",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1603,7 +3232,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-hosted-tool-permissions",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1616,7 +3257,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-hosted-tool-permissions",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1627,7 +3280,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-model-permissions",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1638,7 +3303,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-model-permissions",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1651,7 +3328,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-model-permissions",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1662,7 +3351,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-rate-limits",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1675,7 +3377,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-rate-limits",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1686,7 +3400,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-service-accounts",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1699,7 +3426,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-project-service-account",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1710,7 +3449,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-service-account",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1721,7 +3472,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-service-account",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1734,7 +3497,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-service-account",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1747,7 +3522,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.CreateanAPIkeyforaserviceaccount",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1758,7 +3545,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-spend-alerts",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1771,7 +3571,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-project-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1782,7 +3594,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1793,7 +3617,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1806,7 +3642,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1817,7 +3665,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Deleteprojectspendlimit",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1828,7 +3688,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Getprojectspendlimit",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1841,7 +3713,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Updateprojectspendlimit",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1852,7 +3736,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-users",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1865,7 +3762,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-project-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1876,7 +3785,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1887,7 +3808,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1900,7 +3833,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.modify-project-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1911,7 +3856,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-roles",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1924,7 +3881,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-role",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1935,7 +3903,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1946,7 +3926,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1959,7 +3951,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -1970,7 +3974,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-organization-spend-alerts",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -1983,7 +3999,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-organization-spend-alert",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -1994,7 +4021,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-organization-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2005,7 +4044,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-organization-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2018,7 +4069,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-organization-spend-alert",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2029,7 +4092,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Deleteorganizationspendlimit",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2040,7 +4114,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Getorganizationspendlimit",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2053,7 +4138,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.Updateorganizationspendlimit",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2064,7 +4160,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-audio-speeches",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2075,7 +4183,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-audio-transcriptions",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2086,7 +4206,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-code-interpreter-sessions",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2097,7 +4229,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-completions",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2108,7 +4252,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-embeddings",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2119,7 +4275,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-file-search-calls",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2130,7 +4298,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-images",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2141,7 +4321,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-moderations",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2152,7 +4344,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-vector-stores",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2163,7 +4367,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.usage-web-search-calls",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2174,7 +4390,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-users",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2185,7 +4413,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2196,7 +4436,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2209,7 +4461,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.modify-user",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2220,7 +4484,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-user-role-assignments",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2233,7 +4510,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.assign-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2244,7 +4533,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.unassign-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2255,7 +4556,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2266,7 +4579,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-group-role-assignments",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2279,7 +4605,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.assign-project-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2290,7 +4628,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.unassign-project-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2301,7 +4651,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-group-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2312,7 +4674,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-roles",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2325,7 +4700,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.create-project-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2336,7 +4723,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.delete-project-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2347,7 +4746,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2360,7 +4771,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.update-project-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2371,7 +4794,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.list-project-user-role-assignments",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2384,7 +4820,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.assign-project-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2395,7 +4843,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.unassign-project-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2406,7 +4866,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.organization.retrieve-project-user-role",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2420,7 +4892,19 @@
     "ResponseMedia": [
       "application/sdp"
     ],
-    "SuccessStatus": 201
+    "SuccessStatus": 201,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.realtime.create-realtime-call",
+    "Transports": [
+      "binary",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2431,7 +4915,19 @@
       "application/json"
     ],
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.accept-realtime-call",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2440,7 +4936,18 @@
     "Capability": "realtime",
     "RequestMedia": null,
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.hangup-realtime-call",
+    "Transports": [
+      "path"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2451,7 +4958,19 @@
       "application/json"
     ],
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.refer-realtime-call",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2462,7 +4981,19 @@
       "application/json"
     ],
     "ResponseMedia": null,
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.reject-realtime-call",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2475,7 +5006,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.create-realtime-client-secret",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2488,7 +5030,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.create-realtime-session",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2501,7 +5054,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.realtime.create-realtime-transcription-session",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2514,7 +5078,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "raw_sdk_exception",
+    "LocalCase": "http.realtime.create-realtime-translation-client-secret",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2528,7 +5103,19 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.createResponse",
+    "Transports": [
+      "json",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2541,7 +5128,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.Compactconversation",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2554,7 +5152,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_Compactconversation",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2567,7 +5177,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.Getinputtokencounts",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2580,7 +5201,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_Getinputtokencounts",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2591,7 +5224,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.deleteResponse",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2602,7 +5247,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.getResponse",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2613,7 +5271,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.cancelResponse",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2624,7 +5294,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_cancelResponse",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2635,7 +5318,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.listInputItems",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2646,7 +5342,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_listInputItems",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2657,7 +5366,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_deleteResponse",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2668,7 +5390,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_getResponse",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2682,7 +5417,20 @@
       "application/json",
       "text/event-stream"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.responses.beta_createResponse",
+    "Transports": [
+      "query",
+      "json",
+      "sse"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2693,7 +5441,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.ListSkills",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2707,7 +5467,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.CreateSkill",
+    "Transports": [
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2718,7 +5490,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.DeleteSkill",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2729,7 +5513,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.GetSkill",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2742,7 +5538,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.UpdateSkillDefaultVersion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2754,7 +5562,20 @@
       "application/json",
       "application/zip"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.GetSkillContent",
+    "Transports": [
+      "path",
+      "json",
+      "binary"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2765,7 +5586,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.ListSkillVersions",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2779,7 +5613,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.CreateSkillVersion",
+    "Transports": [
+      "path",
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2790,7 +5637,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.DeleteSkillVersion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2801,7 +5660,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.GetSkillVersion",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2813,7 +5684,20 @@
       "application/json",
       "application/zip"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.skills.GetSkillVersionContent",
+    "Transports": [
+      "path",
+      "json",
+      "binary"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2826,7 +5710,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.createThread",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2839,7 +5734,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.createThreadAndRun",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2850,7 +5756,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.deleteThread",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2861,7 +5779,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.getThread",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2874,7 +5804,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.modifyThread",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2885,7 +5827,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.listMessages",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2898,7 +5853,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.createMessage",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -2909,7 +5876,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.deleteMessage",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2920,7 +5899,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.getMessage",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2933,7 +5924,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.modifyMessage",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2944,7 +5947,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.listRuns",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2957,7 +5973,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.createRun",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -2968,7 +5997,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.getRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2981,7 +6022,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.modifyRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -2992,7 +6045,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.cancelRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3003,7 +6068,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.listRunSteps",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3014,7 +6092,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.getRunStep",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3027,7 +6118,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.assistants.submitToolOuputsToRun",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3040,7 +6143,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.uploads.createUpload",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3051,7 +6165,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.uploads.cancelUpload",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3064,7 +6190,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.uploads.completeUpload",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3077,7 +6215,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.uploads.addUploadPart",
+    "Transports": [
+      "path",
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3088,7 +6239,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.listVectorStores",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3101,7 +6264,18 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.createVectorStore",
+    "Transports": [
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -3112,7 +6286,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.deleteVectorStore",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3123,7 +6309,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.getVectorStore",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3136,7 +6334,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.modifyVectorStore",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3149,7 +6359,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.createVectorStoreFileBatch",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3160,7 +6382,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.getVectorStoreFileBatch",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3171,7 +6405,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.cancelVectorStoreFileBatch",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3182,7 +6428,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.listFilesInVectorStoreBatch",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3193,7 +6452,20 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.listVectorStoreFiles",
+    "Transports": [
+      "path",
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3206,7 +6478,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.createVectorStoreFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -3217,7 +6501,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.deleteVectorStoreFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3228,7 +6524,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.getVectorStoreFile",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3241,7 +6549,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.updateVectorStoreFileAttributes",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3252,7 +6572,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.retrieveVectorStoreFileContent",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3265,7 +6597,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.vector_stores.searchVectorStore",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3276,7 +6620,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.ListVideos",
+    "Transports": [
+      "query",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3290,7 +6646,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.createVideo",
+    "Transports": [
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3303,7 +6671,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.CreateVideoCharacter",
+    "Transports": [
+      "multipart",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3314,7 +6694,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.GetVideoCharacter",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3328,7 +6720,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.CreateVideoEdit",
+    "Transports": [
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3342,7 +6746,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.CreateVideoExtend",
+    "Transports": [
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "DELETE",
@@ -3353,7 +6769,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.DeleteVideo",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3364,7 +6792,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.GetVideo",
+    "Transports": [
+      "path",
+      "json"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "GET",
@@ -3377,7 +6817,21 @@
       "image/webp",
       "video/mp4"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.RetrieveVideoContent",
+    "Transports": [
+      "path",
+      "query",
+      "json",
+      "binary"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   },
   {
     "Method": "POST",
@@ -3391,6 +6845,19 @@
     "ResponseMedia": [
       "application/json"
     ],
-    "SuccessStatus": 200
+    "SuccessStatus": 200,
+    "SDKCall": "resource_helper",
+    "LocalCase": "http.videos.CreateVideoRemix",
+    "Transports": [
+      "path",
+      "json",
+      "multipart"
+    ],
+    "SchemaCases": [
+      "minimal_valid_request",
+      "valid_success_response"
+    ],
+    "LiveProfile": "unavailable",
+    "LiveReason": "no named bounded live differential is configured"
   }
 ]

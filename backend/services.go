@@ -2,6 +2,7 @@ package backend
 
 import (
 	"fmt"
+	"maps"
 	"reflect"
 )
 
@@ -37,13 +38,9 @@ func NewServices(options ...Option) (Services, error) {
 	}
 
 	handlers := make(map[Capability]Handler, len(cfg.handlers))
-	for capability, handler := range cfg.handlers {
-		handlers[capability] = handler
-	}
+	maps.Copy(handlers, cfg.handlers)
 	sessions := make(map[SessionSurface]SessionBackend, len(cfg.sessions))
-	for surface, session := range cfg.sessions {
-		sessions[surface] = session
-	}
+	maps.Copy(sessions, cfg.sessions)
 	return Services{defaultHandler: cfg.defaultHandler, handlers: handlers, sessions: sessions}, nil
 }
 

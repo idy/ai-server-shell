@@ -105,6 +105,17 @@ func normalizeNullSchemas(value any) {
 				typed["enum"] = []any{nil}
 			}
 		}
+		// kin-openapi v0.135 uses the parent type while decoding primitive
+		// multipart fields. OpenAPI 3.1 permits that type to live only on the
+		// anyOf branches, as the frozen OpenAI schema does for fields such as
+		// audio model. Copying a type shared by every branch to the parent is
+		// semantically equivalent and lets the decoder preserve the field value
+		// for the subsequent schema validation pass.
+		if _, exists := typed["type"]; !exists {
+			if commonType, ok := commonAnyOfType(typed["anyOf"]); ok {
+				typed["type"] = commonType
+			}
+		}
 		for _, child := range typed {
 			normalizeNullSchemas(child)
 		}
@@ -113,6 +124,30 @@ func normalizeNullSchemas(value any) {
 			normalizeNullSchemas(child)
 		}
 	}
+}
+
+func commonAnyOfType(value any) (string, bool) {
+	branches, ok := value.([]any)
+	if !ok || len(branches) == 0 {
+		return "", false
+	}
+	var common string
+	for _, branch := range branches {
+		object, ok := branch.(map[string]any)
+		if !ok {
+			return "", false
+		}
+		branchType, ok := object["type"].(string)
+		if !ok || branchType == "null" {
+			return "", false
+		}
+		if common == "" {
+			common = branchType
+		} else if common != branchType {
+			return "", false
+		}
+	}
+	return common, true
 }
 
 // OperationByID returns one frozen operation descriptor.

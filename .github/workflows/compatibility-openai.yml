@@ -8,9 +8,14 @@ on:
         required: true
         default: safe
         type: choice
-        options: [safe, full]
+        options: [safe, paid, mutation]
+      allow_cost:
+        description: Required for paid and mutation profiles
+        required: true
+        default: false
+        type: boolean
       allow_mutation:
-        description: Required for the full profile
+        description: Required for the mutation profile
         required: true
         default: false
         type: boolean
@@ -21,6 +26,25 @@ permissions:
   contents: read
 
 jobs:
+  validate-dispatch:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate live profile gates
+        env:
+          PROFILE: ${{ inputs.profile }}
+          ALLOW_COST: ${{ inputs.allow_cost }}
+          ALLOW_MUTATION: ${{ inputs.allow_mutation }}
+        run: |
+          if [[ "$PROFILE" != "safe" && "$ALLOW_COST" != "true" ]]; then
+            echo "The $PROFILE profile requires allow_cost."
+            exit 1
+          fi
+          if [[ "$PROFILE" == "mutation" && "$ALLOW_MUTATION" != "true" ]]; then
+            echo "The mutation profile requires allow_mutation."
+            exit 1
+          fi
+
   safe:
     if: github.event_name == 'schedule' || inputs.profile == 'safe'
     runs-on: ubuntu-latest
@@ -44,10 +68,10 @@ jobs:
         with:
           name: openai-compatibility-safe
           path: compatibility-safe.txt
-  full:
-    if: github.event_name == 'workflow_dispatch' && inputs.profile == 'full' && inputs.allow_mutation
+  gated:
+    if: github.event_name == 'workflow_dispatch' && inputs.profile != 'safe' && inputs.allow_cost && (inputs.profile != 'mutation' || inputs.allow_mutation)
     runs-on: ubuntu-latest
-    environment: openai-compatibility-full
+    environment: openai-compatibility-gated
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-go@v5
@@ -57,13 +81,14 @@ jobs:
         with:
           node-version: 22
       - run: npm --prefix tests/sdk/openai-node ci
-      - run: go test -tags=compatibility -v ./tests/compatibility/openai | tee compatibility-full.txt
+      - run: go test -tags=compatibility -v ./tests/compatibility/openai | tee compatibility-gated.txt
         env:
-          OPENAI_COMPAT_PROFILE: full
-          OPENAI_COMPAT_ALLOW_MUTATION: "1"
+          OPENAI_COMPAT_PROFILE: ${{ inputs.profile }}
+          OPENAI_COMPAT_ALLOW_COST: "1"
+          OPENAI_COMPAT_ALLOW_MUTATION: ${{ inputs.allow_mutation && '1' || '0' }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       - if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: openai-compatibility-full
-          path: compatibility-full.txt
+          name: openai-compatibility-${{ inputs.profile }}
+          path: compatibility-gated.txt

@@ -3,6 +3,7 @@ package rest
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
@@ -55,6 +56,44 @@ func TestHandlerMapsRequestAndResponse(t *testing.T) {
 	}
 	if received.Operation != "listModels" || received.Metadata.CallerID != "caller" || received.Metadata.Extensions["Authorization"] != nil || string(received.Parameters["after"]) != `"cursor"` {
 		t.Fatalf("backend request = %#v", received)
+	}
+}
+
+func TestSchemaValidationRejectsHighRiskBoundaries(t *testing.T) {
+	called := false
+	services, _ := backend.NewServices(backend.WithHandler(backend.HandlerFunc(func(context.Context, backend.Request) (backend.Response, error) {
+		called = true
+		return backend.Response{JSON: json.RawMessage(`{"object":"list","data":[]}`)}, nil
+	})))
+	tests := []struct {
+		name        string
+		request     *http.Request
+		contentType string
+	}{
+		{"invalid query", httptest.NewRequest(http.MethodGet, "/v1/assistants?limit=not-an-integer", nil), ""},
+		{"wrong media type", httptest.NewRequest(http.MethodPost, "/v1/embeddings", bytes.NewBufferString(`{"model":"test","input":"hello"}`)), "text/plain"},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			called = false
+			test.request.Header.Set("Content-Type", test.contentType)
+			recorder := httptest.NewRecorder()
+			testHandler(t, services, true, nil).ServeHTTP(recorder, test.request)
+			if recorder.Code != http.StatusBadRequest || called {
+				t.Fatalf("status=%d backend_called=%v body=%s", recorder.Code, called, recorder.Body.String())
+			}
+		})
+	}
+}
+
+func TestSchemaValidationRejectsInvalidBackendResponse(t *testing.T) {
+	services, _ := backend.NewServices(backend.WithModels(backend.HandlerFunc(func(context.Context, backend.Request) (backend.Response, error) {
+		return backend.Response{JSON: json.RawMessage(`{}`)}, nil
+	})))
+	recorder := httptest.NewRecorder()
+	testHandler(t, services, true, nil).ServeHTTP(recorder, httptest.NewRequest(http.MethodGet, "/v1/models", nil))
+	if recorder.Code != http.StatusInternalServerError {
+		t.Fatalf("status=%d body=%s", recorder.Code, recorder.Body.String())
 	}
 }
 

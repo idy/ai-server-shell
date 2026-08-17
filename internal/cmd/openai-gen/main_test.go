@@ -10,7 +10,7 @@ import (
 func TestCollectOperationsAndRenderDeterministically(t *testing.T) {
 	spec := document{Paths: map[string]map[string]operation{
 		"/models": {
-			"get":        {OperationID: "listModels", Tags: []string{"Models"}, Responses: map[string]response{"200": {Content: map[string]json.RawMessage{"application/json": nil}}}},
+			"get":        {OperationID: "listModels", Tags: []string{"Models"}, Parameters: []parameter{{In: "query"}}, Responses: map[string]response{"200": {Content: map[string]json.RawMessage{"application/json": nil}}}},
 			"parameters": {},
 		},
 		"/containers/{id}/content": {
@@ -18,7 +18,7 @@ func TestCollectOperationsAndRenderDeterministically(t *testing.T) {
 		},
 	}}
 	operations := collectOperations(spec)
-	if len(operations) != 2 || operations[0].OperationID != "upload" || operations[0].Capability != "containers" || operations[0].SuccessStatus != 201 || operations[1].Capability != "models" {
+	if len(operations) != 2 || operations[0].OperationID != "upload" || operations[0].Capability != "containers" || operations[0].SuccessStatus != 201 || operations[0].SDKCall != "resource_helper" || operations[1].Capability != "models" || !operations[1].HasQuery {
 		t.Fatalf("operations = %#v", operations)
 	}
 	raw := []byte(`{"openapi":"3.1.0","paths":{}}`)
@@ -56,13 +56,68 @@ func TestCapabilityMappingAndAppendUnique(t *testing.T) {
 }
 
 func TestRenderCompatibilityIsSorted(t *testing.T) {
-	matrix := renderCompatibility([]generatedOperation{{OperationID: "listModels", Method: "GET", Path: "/models", Capability: "models"}}, eventInventory{
+	matrix := renderCompatibility([]generatedOperation{{OperationID: "listModels", Method: "GET", Path: "/models", Capability: "models", SDKCall: "resource_helper", LocalCase: "http.models.listModels", Transports: []string{"query", "json"}, SchemaCases: []string{"minimal_valid_request"}, LiveProfile: "safe", LiveReason: "scheduled"}}, eventInventory{
 		Surfaces: map[string]eventSurface{"realtime": {Client: []string{"session.update"}, Server: []string{"session.updated"}}},
 	})
 	text := string(matrix)
-	for _, required := range []string{`operation: "listModels"`, `type: "session.update"`, `support: implemented`} {
+	for _, required := range []string{`operation: "listModels"`, `type: "session.update"`, `local_semantic: validated_official_sdk`, `live_profile: safe`} {
 		if !strings.Contains(text, required) {
 			t.Fatalf("matrix missing %q:\n%s", required, text)
 		}
+	}
+}
+
+func TestEvidenceClassification(t *testing.T) {
+	raw, helper := 0, 0
+	for operation := range rawOnlyOperations {
+		if operation == "" {
+			t.Fatal("empty raw-only operation")
+		}
+		raw++
+	}
+	if raw != 8 {
+		t.Fatalf("raw-only operations = %d", raw)
+	}
+	for _, operation := range []generatedOperation{
+		{Method: "POST", Path: "/audio/transcriptions", RequestMedia: []string{"multipart/form-data"}, ResponseMedia: []string{"application/json", "text/event-stream"}},
+		{Method: "GET", Path: "/files/{file_id}/content", ResponseMedia: []string{"application/octet-stream"}},
+	} {
+		if len(operationTransports(operation)) == 0 {
+			t.Fatal("operation has no transport evidence")
+		}
+		helper++
+	}
+	if helper != 2 {
+		t.Fatal("test setup did not exercise helper classifications")
+	}
+}
+
+func TestValidateEvidenceRejectsMissingAndDuplicateMetadata(t *testing.T) {
+	complete := make([]generatedOperation, 0, len(rawOnlyOperations))
+	for operationID := range rawOnlyOperations {
+		complete = append(complete, generatedOperation{
+			OperationID: operationID, SDKCall: "raw_sdk_exception", LocalCase: "http." + operationID,
+			Transports: []string{"json"}, SchemaCases: []string{"minimal"}, LiveProfile: "unavailable",
+		})
+	}
+	if err := validateEvidence(complete, eventInventory{}); err != nil {
+		t.Fatalf("complete evidence rejected: %v", err)
+	}
+	duplicate := append(append([]generatedOperation(nil), complete...), complete[0])
+	if err := validateEvidence(duplicate, eventInventory{}); err == nil || !strings.Contains(err.Error(), "duplicate operation") {
+		t.Fatalf("duplicate evidence error = %v", err)
+	}
+	missing := append([]generatedOperation(nil), complete[1:]...)
+	if err := validateEvidence(missing, eventInventory{}); err == nil || !strings.Contains(err.Error(), "absent") {
+		t.Fatalf("missing evidence error = %v", err)
+	}
+	badProfile := append([]generatedOperation(nil), complete...)
+	badProfile[0].LiveProfile = "full"
+	if err := validateEvidence(badProfile, eventInventory{}); err == nil || !strings.Contains(err.Error(), "incomplete") {
+		t.Fatalf("invalid profile error = %v", err)
+	}
+	events := eventInventory{Surfaces: map[string]eventSurface{"realtime": {Client: []string{"session.update", "session.update"}}}}
+	if err := validateEvidence(complete, events); err == nil || !strings.Contains(err.Error(), "duplicate event") {
+		t.Fatalf("duplicate event error = %v", err)
 	}
 }

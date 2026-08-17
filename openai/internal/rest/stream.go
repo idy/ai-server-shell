@@ -43,7 +43,7 @@ func writeSSE(ctx context.Context, writer http.ResponseWriter, requestID string,
 			if len(data) == 0 {
 				data, _ = json.Marshal(map[string]string{"type": event.Type})
 			}
-			for _, line := range strings.Split(string(data), "\n") {
+			for line := range strings.SplitSeq(string(data), "\n") {
 				_, _ = fmt.Fprintf(buffer, "data: %s\n", line)
 			}
 			_, _ = buffer.WriteString("\n")
