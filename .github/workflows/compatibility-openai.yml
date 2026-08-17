@@ -26,6 +26,25 @@ permissions:
   contents: read
 
 jobs:
+  validate-dispatch:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate live profile gates
+        env:
+          PROFILE: ${{ inputs.profile }}
+          ALLOW_COST: ${{ inputs.allow_cost }}
+          ALLOW_MUTATION: ${{ inputs.allow_mutation }}
+        run: |
+          if [[ "$PROFILE" != "safe" && "$ALLOW_COST" != "true" ]]; then
+            echo "The $PROFILE profile requires allow_cost."
+            exit 1
+          fi
+          if [[ "$PROFILE" == "mutation" && "$ALLOW_MUTATION" != "true" ]]; then
+            echo "The mutation profile requires allow_mutation."
+            exit 1
+          fi
+
   safe:
     if: github.event_name == 'schedule' || inputs.profile == 'safe'
     runs-on: ubuntu-latest
