@@ -29,7 +29,11 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 		t.Fatal("run npm --prefix tests/sdk/openai-node ci before the integration suite")
 	}
 
-	fake := &testutil.FakeBackend{}
+	fixtures := loadSemanticFixtures(t, repoRoot, manifest, spec)
+	fake, err := testutil.NewFakeBackend(fixtures)
+	if err != nil {
+		t.Fatal(err)
+	}
 	services, err := backend.NewServices(backend.WithHandler(fake))
 	if err != nil {
 		t.Fatal(err)
@@ -65,7 +69,7 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 		t.Fatalf("decode SDK result: %v\n%s", err, output)
 	}
 	if result.Expected != 288 || result.Passed != result.Expected || result.HelperCases != 280 || result.RawCases != 8 || len(result.Failures) != 0 || len(result.NegativeCases) != 1 || len(result.StreamCases) != 1 {
-		t.Fatalf("official SDK semantic cases: expected=%d passed=%d failures=%v", result.Expected, result.Passed, result.Failures)
+		t.Fatalf("official SDK semantic cases: expected=%d passed=%d failures=%v backend_errors=%v", result.Expected, result.Passed, result.Failures, fake.Errors())
 	}
 	if got := len(fake.Requests()); got != 289 {
 		t.Fatalf("backend request count = %d, want 289", got)
@@ -92,6 +96,21 @@ func TestOfficialNodeSDKFrozenOperationInventory(t *testing.T) {
 	if len(seen) != 288 || parameterized == 0 || !media["application/json"] || !media["multipart/form-data"] || !media["application/sdp"] {
 		t.Fatalf("canonical coverage operations=%d parameterized=%d media=%v", len(seen), parameterized, media)
 	}
+}
+
+func loadSemanticFixtures(t *testing.T, root, manifest, spec string) []testutil.SemanticFixture {
+	t.Helper()
+	command := exec.Command("node", filepath.Join(root, "tests", "sdk", "openai-node", "fixtures.mjs"))
+	command.Env = append(os.Environ(), "AI_SHELL_OPERATION_MANIFEST="+manifest, "AI_SHELL_OPENAPI_SPEC="+spec)
+	output, err := command.CombinedOutput()
+	if err != nil {
+		t.Fatalf("build backend-owned SDK fixtures: %v\n%s", err, output)
+	}
+	var fixtures []testutil.SemanticFixture
+	if err := json.Unmarshal(output, &fixtures); err != nil || len(fixtures) != 288 {
+		t.Fatalf("decode semantic fixtures: count=%d err=%v", len(fixtures), err)
+	}
+	return fixtures
 }
 
 func TestOfficialNodeSDKWebSockets(t *testing.T) {

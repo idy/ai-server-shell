@@ -12,6 +12,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.assistants.listAssistants",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -208,6 +209,7 @@
     "SDKCall": "raw_sdk_exception",
     "LocalCase": "http.audio.listVoiceConsents",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -351,6 +353,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.batches.listBatches",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -443,6 +446,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.chat.listChatCompletions",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -563,6 +567,7 @@
     "LocalCase": "http.chat.getChatCompletionMessages",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -632,6 +637,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.chatkit.ListThreadsMethod",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -701,6 +707,7 @@
     "LocalCase": "http.chatkit.ListThreadItemsMethod",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -747,6 +754,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.containers.ListContainers",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -837,6 +845,7 @@
     "LocalCase": "http.containers.ListContainerFiles",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1070,6 +1079,7 @@
     "LocalCase": "http.conversations.listConversationItems",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1095,6 +1105,7 @@
     "LocalCase": "http.conversations.createConversationItems",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1141,6 +1152,7 @@
     "LocalCase": "http.conversations.getConversationItem",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1187,6 +1199,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.evals.listEvals",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1305,6 +1318,7 @@
     "LocalCase": "http.evals.getEvalRuns",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1422,6 +1436,7 @@
     "LocalCase": "http.evals.getEvalRunOutputItems",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1467,6 +1482,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.files.listFiles",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1632,6 +1648,7 @@
     "LocalCase": "http.fine_tuning.listFineTuningCheckpointPermissions",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1702,6 +1719,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.fine_tuning.listPaginatedFineTuningJobs",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1795,6 +1813,7 @@
     "LocalCase": "http.fine_tuning.listFineTuningJobCheckpoints",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -1818,6 +1837,7 @@
     "LocalCase": "http.fine_tuning.listFineTuningEvents",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2057,6 +2077,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.admin-api-keys-list",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2149,6 +2170,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-audit-logs",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2171,6 +2193,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.listOrganizationCertificates",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2289,6 +2312,7 @@
     "LocalCase": "http.organization.getCertificate",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2336,6 +2360,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-costs",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2404,6 +2429,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-groups",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2522,6 +2548,7 @@
     "LocalCase": "http.organization.list-group-role-assignments",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2616,6 +2643,7 @@
     "LocalCase": "http.organization.list-group-users",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2709,6 +2737,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-invites",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2801,6 +2830,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-projects",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2896,6 +2926,7 @@
     "LocalCase": "http.organization.list-project-api-keys",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -2988,6 +3019,7 @@
     "LocalCase": "http.organization.listProjectCertificates",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3109,6 +3141,7 @@
     "LocalCase": "http.organization.list-project-groups",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3180,6 +3213,7 @@
     "LocalCase": "http.organization.retrieve-project-group",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3322,6 +3356,7 @@
     "LocalCase": "http.organization.list-project-rate-limits",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3370,6 +3405,7 @@
     "LocalCase": "http.organization.list-project-service-accounts",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3514,6 +3550,7 @@
     "LocalCase": "http.organization.list-project-spend-alerts",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3704,6 +3741,7 @@
     "LocalCase": "http.organization.list-project-users",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3822,6 +3860,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-roles",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -3939,6 +3978,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-organization-spend-alerts",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4124,6 +4164,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-audio-speeches",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4146,6 +4187,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-audio-transcriptions",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4168,6 +4210,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-code-interpreter-sessions",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4190,6 +4233,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-completions",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4212,6 +4256,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-embeddings",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4234,6 +4279,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-file-search-calls",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4256,6 +4302,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-images",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4278,6 +4325,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-moderations",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4300,6 +4348,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-vector-stores",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4322,6 +4371,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.usage-web-search-calls",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4344,6 +4394,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.organization.list-users",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4438,6 +4489,7 @@
     "LocalCase": "http.organization.list-user-role-assignments",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4532,6 +4584,7 @@
     "LocalCase": "http.organization.list-project-group-role-assignments",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4626,6 +4679,7 @@
     "LocalCase": "http.organization.list-project-roles",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -4745,6 +4799,7 @@
     "LocalCase": "http.organization.list-project-user-role-assignments",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5197,6 +5252,7 @@
     "LocalCase": "http.responses.getResponse",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5267,6 +5323,7 @@
     "LocalCase": "http.responses.listInputItems",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5388,6 +5445,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.skills.ListSkills",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5533,6 +5591,7 @@
     "LocalCase": "http.skills.ListSkillVersions",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5773,6 +5832,7 @@
     "LocalCase": "http.assistants.listMessages",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5892,6 +5952,7 @@
     "LocalCase": "http.assistants.listRuns",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -5917,6 +5978,7 @@
     "LocalCase": "http.assistants.createRun",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6011,6 +6073,7 @@
     "LocalCase": "http.assistants.listRunSteps",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6034,6 +6097,7 @@
     "LocalCase": "http.assistants.getRunStep",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6179,6 +6243,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.vector_stores.listVectorStores",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6368,6 +6433,7 @@
     "LocalCase": "http.vector_stores.listFilesInVectorStoreBatch",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6391,6 +6457,7 @@
     "LocalCase": "http.vector_stores.listVectorStoreFiles",
     "Transports": [
       "path",
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6557,6 +6624,7 @@
     "SDKCall": "resource_helper",
     "LocalCase": "http.videos.ListVideos",
     "Transports": [
+      "query",
       "json"
     ],
     "SchemaCases": [
@@ -6754,6 +6822,7 @@
     "LocalCase": "http.videos.RetrieveVideoContent",
     "Transports": [
       "path",
+      "query",
       "json",
       "binary"
     ],

@@ -10,7 +10,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.listAssistants"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -106,7 +106,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.audio.listVoiceConsents"
     sdk_call: raw_sdk_exception
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -178,7 +178,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.batches.listBatches"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -226,7 +226,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.chat.listChatCompletions"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -286,7 +286,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.chat.getChatCompletionMessages"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -322,7 +322,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.chatkit.ListThreadsMethod"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -358,7 +358,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.chatkit.ListThreadItemsMethod"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -382,7 +382,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.containers.ListContainers"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -430,7 +430,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.containers.ListContainerFiles"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -550,7 +550,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.conversations.listConversationItems"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -562,7 +562,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.conversations.createConversationItems"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -586,7 +586,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.conversations.getConversationItem"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -610,7 +610,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.evals.listEvals"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -670,7 +670,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.evals.getEvalRuns"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -730,7 +730,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.evals.getEvalRunOutputItems"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -754,7 +754,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.files.listFiles"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -838,7 +838,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.fine_tuning.listFineTuningCheckpointPermissions"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -874,7 +874,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.fine_tuning.listPaginatedFineTuningJobs"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -922,7 +922,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.fine_tuning.listFineTuningJobCheckpoints"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -934,7 +934,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.fine_tuning.listFineTuningEvents"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1054,7 +1054,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.admin-api-keys-list"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1102,7 +1102,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-audit-logs"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1114,7 +1114,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.listOrganizationCertificates"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1174,7 +1174,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.getCertificate"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1198,7 +1198,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-costs"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1234,7 +1234,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-groups"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1294,7 +1294,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-group-role-assignments"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1342,7 +1342,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-group-users"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1390,7 +1390,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-invites"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1438,7 +1438,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-projects"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1486,7 +1486,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-api-keys"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1534,7 +1534,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.listProjectCertificates"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1594,7 +1594,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-groups"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1630,7 +1630,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.retrieve-project-group"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1702,7 +1702,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-rate-limits"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1726,7 +1726,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-service-accounts"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1798,7 +1798,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-spend-alerts"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1894,7 +1894,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-users"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -1954,7 +1954,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-roles"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2014,7 +2014,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-organization-spend-alerts"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2110,7 +2110,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-audio-speeches"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2122,7 +2122,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-audio-transcriptions"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2134,7 +2134,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-code-interpreter-sessions"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2146,7 +2146,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-completions"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2158,7 +2158,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-embeddings"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2170,7 +2170,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-file-search-calls"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2182,7 +2182,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-images"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2194,7 +2194,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-moderations"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2206,7 +2206,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-vector-stores"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2218,7 +2218,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.usage-web-search-calls"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2230,7 +2230,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-users"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2278,7 +2278,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-user-role-assignments"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2326,7 +2326,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-group-role-assignments"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2374,7 +2374,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-roles"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2434,7 +2434,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.organization.list-project-user-role-assignments"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2662,7 +2662,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.responses.getResponse"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2698,7 +2698,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.responses.listInputItems"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2758,7 +2758,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.skills.ListSkills"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2830,7 +2830,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.skills.ListSkillVersions"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -2950,7 +2950,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.listMessages"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3010,7 +3010,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.listRuns"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3022,7 +3022,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.createRun"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3070,7 +3070,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.listRunSteps"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3082,7 +3082,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.assistants.getRunStep"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3154,7 +3154,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.vector_stores.listVectorStores"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3250,7 +3250,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.vector_stores.listFilesInVectorStoreBatch"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3262,7 +3262,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.vector_stores.listVectorStoreFiles"
     sdk_call: resource_helper
-    transports: ["path", "json"]
+    transports: ["path", "query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3346,7 +3346,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.videos.ListVideos"
     sdk_call: resource_helper
-    transports: ["json"]
+    transports: ["query", "json"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"
@@ -3442,7 +3442,7 @@ http:
     local_semantic: validated_official_sdk
     local_case: "http.videos.RetrieveVideoContent"
     sdk_call: resource_helper
-    transports: ["path", "json", "binary"]
+    transports: ["path", "query", "json", "binary"]
     schema_cases: ["minimal_valid_request", "valid_success_response"]
     live_profile: unavailable
     live_reason: "no named bounded live differential is configured"

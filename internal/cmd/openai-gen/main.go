@@ -24,8 +24,13 @@ type document struct {
 type operation struct {
 	OperationID string              `json:"operationId"`
 	Tags        []string            `json:"tags"`
+	Parameters  []parameter         `json:"parameters"`
 	RequestBody *requestBody        `json:"requestBody"`
 	Responses   map[string]response `json:"responses"`
+}
+
+type parameter struct {
+	In string `json:"in"`
 }
 
 type requestBody struct {
@@ -50,6 +55,7 @@ type generatedOperation struct {
 	SchemaCases   []string
 	LiveProfile   string
 	LiveReason    string
+	HasQuery      bool `json:"-"`
 }
 
 type eventInventory struct {
@@ -203,6 +209,12 @@ func collectOperations(spec document) []generatedOperation {
 				Capability:  capabilityFor(path, operation.Tags),
 			}
 			item.SuccessStatus = successStatus(operation.Responses)
+			for _, parameter := range operation.Parameters {
+				if parameter.In == "query" {
+					item.HasQuery = true
+					break
+				}
+			}
 			if operation.RequestBody != nil {
 				for media := range operation.RequestBody.Content {
 					item.RequestMedia = append(item.RequestMedia, media)
@@ -252,7 +264,7 @@ func operationTransports(operation generatedOperation) []string {
 	if strings.Contains(operation.Path, "{") {
 		add("path")
 	}
-	if strings.Contains(operation.Path, "?") {
+	if operation.HasQuery || strings.Contains(operation.Path, "?") {
 		add("query")
 	}
 	for _, media := range append(append([]string(nil), operation.RequestMedia...), operation.ResponseMedia...) {

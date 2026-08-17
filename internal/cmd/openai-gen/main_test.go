@@ -10,7 +10,7 @@ import (
 func TestCollectOperationsAndRenderDeterministically(t *testing.T) {
 	spec := document{Paths: map[string]map[string]operation{
 		"/models": {
-			"get":        {OperationID: "listModels", Tags: []string{"Models"}, Responses: map[string]response{"200": {Content: map[string]json.RawMessage{"application/json": nil}}}},
+			"get":        {OperationID: "listModels", Tags: []string{"Models"}, Parameters: []parameter{{In: "query"}}, Responses: map[string]response{"200": {Content: map[string]json.RawMessage{"application/json": nil}}}},
 			"parameters": {},
 		},
 		"/containers/{id}/content": {
@@ -18,7 +18,7 @@ func TestCollectOperationsAndRenderDeterministically(t *testing.T) {
 		},
 	}}
 	operations := collectOperations(spec)
-	if len(operations) != 2 || operations[0].OperationID != "upload" || operations[0].Capability != "containers" || operations[0].SuccessStatus != 201 || operations[0].SDKCall != "resource_helper" || operations[1].Capability != "models" {
+	if len(operations) != 2 || operations[0].OperationID != "upload" || operations[0].Capability != "containers" || operations[0].SuccessStatus != 201 || operations[0].SDKCall != "resource_helper" || operations[1].Capability != "models" || !operations[1].HasQuery {
 		t.Fatalf("operations = %#v", operations)
 	}
 	raw := []byte(`{"openapi":"3.1.0","paths":{}}`)

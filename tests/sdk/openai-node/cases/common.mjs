@@ -8,25 +8,16 @@ import { runGenerationScenarios } from './generation.mjs';
 const silenceWAV = await fs.readFile(new URL('../fixtures/one-second-silence.wav', import.meta.url));
 
 export async function runHTTPCaseRegistry({ baseURL, apiKey, manifestPath, specPath }) {
-  const [manifest, spec] = await Promise.all([readJSON(manifestPath), readJSON(specPath)]);
-  const helpers = discoverHelpers(makeClient(baseURL, apiKey));
+  const plans = await buildHTTPCasePlans({ baseURL, apiKey, manifestPath, specPath });
   const results = [];
   const failures = [];
-  for (const operation of manifest) {
+  for (const plan of plans) {
+    const { operation, request, response, helper } = plan;
     try {
-      const definition = operationDefinition(spec, operation);
-      const request = await requestFixture(spec, operation, definition);
-      const helper = helpers.get(endpointKey(operation.Method, operation.Path));
-      const response = responseFixture(spec, definition, helper);
       if (!['resource_helper', 'raw_sdk_exception'].includes(operation.SDKCall)) throw new Error('manifest has invalid SDK call ownership');
       const expectedCall = operation.SDKCall === 'raw_sdk_exception' ? 'raw' : 'helper';
       if ((helper ? 'helper' : 'raw') !== expectedCall) throw new Error(`SDK call ownership changed; expected ${expectedCall}`);
-      const headers = {
-        'X-AI-Shell-Case': operation.OperationID,
-        'X-AI-Shell-Response-Status': String(response.status),
-        'X-AI-Shell-Response-Media-Type': response.mediaType,
-        'X-AI-Shell-Response-Body': Buffer.from(response.body).toString('base64'),
-      };
+      const headers = { 'X-AI-Shell-Case': operation.OperationID };
       const client = makeClient(baseURL, apiKey, headers);
       const started = Date.now();
       const result = helper ? await invokeHelper(client, helper, request) : await invokeRaw(client, operation, request);
@@ -46,13 +37,41 @@ export async function runHTTPCaseRegistry({ baseURL, apiKey, manifestPath, specP
   const negativeCases = await runNegativeCases(makeClient(baseURL, apiKey));
   const streamCases = await runGenerationScenarios(makeClient(baseURL, apiKey));
   return {
-    sdk: 'openai-node', version: '7.4.0', expected: manifest.length, passed: results.length,
+    sdk: 'openai-node', version: '7.4.0', expected: plans.length, passed: results.length,
     helper_cases: results.filter((item) => item.sdk_call !== 'raw').length,
     raw_cases: results.filter((item) => item.sdk_call === 'raw').length,
     negative_cases: negativeCases,
     stream_cases: streamCases,
     failures, results,
   };
+}
+
+async function buildHTTPCasePlans({ baseURL, apiKey, manifestPath, specPath }) {
+  const [manifest, spec] = await Promise.all([readJSON(manifestPath), readJSON(specPath)]);
+  const helpers = discoverHelpers(makeClient(baseURL, apiKey));
+  const plans = [];
+  for (const operation of manifest) {
+    const definition = operationDefinition(spec, operation);
+    const request = await requestFixture(spec, operation, definition);
+    const helper = helpers.get(endpointKey(operation.Method, operation.Path));
+    plans.push({ operation, definition, request, helper, response: responseFixture(spec, definition, helper) });
+  }
+  return plans;
+}
+
+export async function buildBackendFixtures(settings) {
+  const plans = await buildHTTPCasePlans(settings);
+  return Promise.all(plans.map(async ({ operation, request, response }) => ({
+    operation: operation.OperationID,
+    capability: operation.Capability,
+    request_media: actualRequestMedia(operation, request.mediaType),
+    parameters: Object.fromEntries(Object.entries({ ...request.pathParameters, ...request.query }).map(([key, value]) => [key, String(value)])),
+    body_json: actualRequestMedia(operation, request.mediaType).includes('json') ? canonicalJSONBody(operation, request.body) : undefined,
+    body_fields: actualRequestMedia(operation, request.mediaType) === 'multipart/form-data' ? Object.keys(request.body ?? {}).sort() : undefined,
+    response_status: response.status,
+    response_media: response.mediaType,
+    response_body: Buffer.from(response.body).toString('base64'),
+  })));
 }
 
 async function runNegativeCases(client) {
@@ -365,6 +384,17 @@ function materializePath(path, parameters) {
 }
 
 function endpointKey(method, path) { return `${method} ${path.replaceAll(/\{[^}]+\}/g, '{}')}`; }
+function actualRequestMedia(operation, generatedMedia) {
+  if (operation.OperationID === 'CreateContainerFile' || operation.OperationID === 'CreateVideoRemix') return 'application/json';
+  return generatedMedia;
+}
+function canonicalJSONBody(operation, body) {
+  let result = body;
+  if (operation.OperationID === 'createEmbedding') result = { ...result, encoding_format: result.encoding_format ?? 'base64' };
+  const [, selector] = operation.Path.split('?');
+  if (selector && result && typeof result === 'object') result = { ...Object.fromEntries(new URLSearchParams(selector)), ...result };
+  return result;
+}
 function preferredRequestMedia(mediaTypes, operation) {
   if (operation === 'create-realtime-call' && mediaTypes.includes('application/sdp')) return 'application/sdp';
   const preferJSON = operation === 'CreateSkill' || operation === 'CreateSkillVersion';
