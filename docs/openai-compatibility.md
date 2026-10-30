@@ -19,10 +19,18 @@ fields are preserved. The generated matrix records route, local semantic,
 transport/schema, and live classifications independently; route inventory alone
 is never reported as semantic compatibility.
 
-OpenAPI 3.1 schemas are validated at the boundary. The runtime validator's
-OpenAPI 3.0 representation rewrites `type: "null"` branches to equivalent
-nullable schemas and permits the explicitly enumerated 3.1 keywords that the
-validator version cannot interpret. The vendored source is never rewritten.
+OpenAPI 3.1 schemas are validated at the boundary. For the legacy validator,
+the router copy rewrites `type: "null"` branches to equivalent nullable schemas
+and permits the explicitly enumerated 3.1 keywords that the validator version
+cannot interpret. Native OpenAPI 3.1 validators retain `type: "null"` so null
+responses remain valid. The router copy also removes duplicate
+`required` names while preserving their first-occurrence order; repeated names
+impose the same constraint as one name. Invalid non-string entries remain for
+the validator to reject. The vendored source is never rewritten.
+For validators that support numeric exclusive bounds, the router copy translates
+legacy boolean `exclusiveMinimum`/`exclusiveMaximum` plus their corresponding
+bounds to the equivalent OpenAPI 3.1 numeric form. The older validator retains
+its supported representation; inclusive and exclusive constraints are preserved.
 
 Requests are currently bounded and buffered up to the configured limit before
 backend dispatch, including multipart and binary inputs. Binary responses stream
