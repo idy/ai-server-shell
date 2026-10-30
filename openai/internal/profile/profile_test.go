@@ -5,6 +5,7 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"net/url"
+	"reflect"
 	"testing"
 )
 
@@ -89,7 +90,7 @@ func TestRouterSpecPromotesCommonAnyOfType(t *testing.T) {
 			map[string]any{"type": "string", "enum": []any{"whisper-1"}},
 		},
 	}
-	normalizeNullSchemas(value)
+	normalizeRouterSchemas(value, nativeOpenAPI31Supported)
 	if value["type"] != "string" {
 		t.Fatalf("promoted type = %#v", value["type"])
 	}
@@ -100,8 +101,112 @@ func TestRouterSpecPromotesCommonAnyOfType(t *testing.T) {
 			map[string]any{"type": "array"},
 		},
 	}
-	normalizeNullSchemas(mixed)
+	normalizeRouterSchemas(mixed, nativeOpenAPI31Supported)
 	if _, exists := mixed["type"]; exists {
 		t.Fatalf("mixed union acquired type: %#v", mixed)
+	}
+}
+
+func TestRouterSpecRequiredFieldsAreUnique(t *testing.T) {
+	raw, err := RouterSpecJSON()
+	if err != nil {
+		t.Fatal(err)
+	}
+	var document any
+	if err := json.Unmarshal(raw, &document); err != nil {
+		t.Fatal(err)
+	}
+	var check func(any)
+	check = func(value any) {
+		switch typed := value.(type) {
+		case map[string]any:
+			if required, ok := typed["required"].([]any); ok {
+				seen := make(map[string]bool, len(required))
+				for _, item := range required {
+					name, ok := item.(string)
+					if !ok || seen[name] {
+						t.Fatalf("invalid required names in router document: %#v", required)
+					}
+					seen[name] = true
+				}
+			}
+			for _, child := range typed {
+				check(child)
+			}
+		case []any:
+			for _, child := range typed {
+				check(child)
+			}
+		}
+	}
+	check(document)
+}
+
+func TestRouterNormalizationPreservesRequiredOrderAndInvalidEntries(t *testing.T) {
+	invalid := map[string]any{"invalid": true}
+	value := map[string]any{
+		"required": []any{"id", "name", "id", invalid, "name", invalid},
+	}
+	normalizeRouterSchemas(value, nativeOpenAPI31Supported)
+	want := []any{"id", "name", invalid, invalid}
+	if !reflect.DeepEqual(value["required"], want) {
+		t.Fatalf("required = %#v, want %#v", value["required"], want)
+	}
+}
+
+func TestRouterNormalizationPreservesSchemaConstraints(t *testing.T) {
+	for _, tc := range []struct {
+		name   string
+		native bool
+		input  map[string]any
+		want   map[string]any
+	}{
+		{
+			"legacy lower bound", false,
+			map[string]any{"minimum": float64(0), "exclusiveMinimum": true},
+			map[string]any{"minimum": float64(0), "exclusiveMinimum": true},
+		},
+		{
+			"numeric lower bound", true,
+			map[string]any{"minimum": float64(0), "exclusiveMinimum": true},
+			map[string]any{"exclusiveMinimum": float64(0)},
+		},
+		{
+			"numeric upper bound", true,
+			map[string]any{"maximum": float64(1), "exclusiveMaximum": true},
+			map[string]any{"exclusiveMaximum": float64(1)},
+		},
+		{
+			"inclusive bound", true,
+			map[string]any{"minimum": float64(0), "exclusiveMinimum": false},
+			map[string]any{"minimum": float64(0)},
+		},
+		{
+			"already numeric", true,
+			map[string]any{"exclusiveMinimum": float64(2)},
+			map[string]any{"exclusiveMinimum": float64(2)},
+		},
+		{
+			"invalid missing bound", true,
+			map[string]any{"exclusiveMinimum": true},
+			map[string]any{"exclusiveMinimum": true},
+		},
+		{
+			"legacy null", false,
+			map[string]any{"type": "null"},
+			map[string]any{"nullable": true, "enum": []any{nil}},
+		},
+		{
+			"native null", true,
+			map[string]any{"type": "null"},
+			map[string]any{"type": "null"},
+		},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			normalizeRouterSchemas(tc.input, tc.native)
+			if !reflect.DeepEqual(tc.input, tc.want) {
+				t.Fatalf("schema = %#v, want %#v", tc.input, tc.want)
+			}
+		})
 	}
 }

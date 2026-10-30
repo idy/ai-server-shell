@@ -10,6 +10,8 @@ import (
 	"net/url"
 	"strings"
 	"sync"
+
+	"github.com/getkin/kin-openapi/openapi3"
 )
 
 // Operation describes one method/path pair in the frozen M1 profile.
@@ -39,6 +41,12 @@ var (
 	eventOnce      sync.Once
 	eventSet       map[string]bool
 )
+
+// Probe decoding support instead of tying router normalization to a module version.
+var nativeOpenAPI31Supported = func() bool {
+	var schema openapi3.Schema
+	return json.Unmarshal([]byte(`{"type":"null","exclusiveMinimum":0}`), &schema) == nil
+}()
 
 // SpecJSON returns an independent copy of the frozen OpenAPI document.
 func SpecJSON() ([]byte, error) {
@@ -74,10 +82,9 @@ func EventAllowed(surface, direction, eventType string) bool {
 	return eventSet[surface+"\x00"+direction+"\x00"+eventType]
 }
 
-// RouterSpecJSON returns a semantically equivalent document accepted by the
-// Go 1.24-compatible kin-openapi release. OpenAPI 3.1 permits type: "null";
-// older kin-openapi represents the same constraint as nullable plus a null
-// enum. The vendored source and its digest remain untouched.
+// RouterSpecJSON returns a semantically equivalent document accepted by both
+// legacy and native OpenAPI 3.1 validators. The vendored source and its digest
+// remain untouched.
 func RouterSpecJSON() ([]byte, error) {
 	raw, err := SpecJSON()
 	if err != nil {
@@ -87,7 +94,7 @@ func RouterSpecJSON() ([]byte, error) {
 	if err := json.Unmarshal(raw, &value); err != nil {
 		return nil, fmt.Errorf("decode frozen OpenAPI document: %w", err)
 	}
-	normalizeNullSchemas(value)
+	normalizeRouterSchemas(value, nativeOpenAPI31Supported)
 	result, err := json.Marshal(value)
 	if err != nil {
 		return nil, fmt.Errorf("encode router OpenAPI document: %w", err)
@@ -95,10 +102,43 @@ func RouterSpecJSON() ([]byte, error) {
 	return result, nil
 }
 
-func normalizeNullSchemas(value any) {
+func normalizeRouterSchemas(value any, nativeOpenAPI31 bool) {
 	switch typed := value.(type) {
 	case map[string]any:
-		if schemaType, ok := typed["type"].(string); ok && schemaType == "null" {
+		// Required names form a set. Normalize only the router copy so strict
+		// validators accept redundant declarations in the frozen source.
+		if required, ok := typed["required"].([]any); ok {
+			seen := make(map[string]bool, len(required))
+			unique := required[:0]
+			for _, item := range required {
+				name, isName := item.(string)
+				if isName && seen[name] {
+					continue
+				}
+				unique = append(unique, item)
+				if isName {
+					seen[name] = true
+				}
+			}
+			typed["required"] = unique
+		}
+		if nativeOpenAPI31 {
+			// Newer validators require the numeric OpenAPI 3.1 spelling.
+			for _, bound := range [][2]string{
+				{"minimum", "exclusiveMinimum"},
+				{"maximum", "exclusiveMaximum"},
+			} {
+				if exclusive, ok := typed[bound[1]].(bool); ok {
+					if !exclusive {
+						delete(typed, bound[1])
+					} else if value, ok := typed[bound[0]].(float64); ok {
+						typed[bound[1]] = value
+						delete(typed, bound[0])
+					}
+				}
+			}
+		}
+		if schemaType, ok := typed["type"].(string); ok && schemaType == "null" && !nativeOpenAPI31 {
 			delete(typed, "type")
 			typed["nullable"] = true
 			if _, exists := typed["enum"]; !exists {
@@ -117,11 +157,11 @@ func normalizeNullSchemas(value any) {
 			}
 		}
 		for _, child := range typed {
-			normalizeNullSchemas(child)
+			normalizeRouterSchemas(child, nativeOpenAPI31)
 		}
 	case []any:
 		for _, child := range typed {
-			normalizeNullSchemas(child)
+			normalizeRouterSchemas(child, nativeOpenAPI31)
 		}
 	}
 }
